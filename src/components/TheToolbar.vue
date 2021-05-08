@@ -5,7 +5,7 @@
     <v-toolbar-title>CrazyPlantPerson</v-toolbar-title>
 
     <v-spacer></v-spacer>
-
+    <v-btn @click="redirectToLogin()">Sign In</v-btn>
     <v-btn icon>
       <v-icon>mdi-dots-vertical</v-icon>
     </v-btn>
@@ -14,5 +14,10 @@
 <script>
 export default {
   name: 'TheToolbar',
+  methods: {
+    redirectToLogin() {
+      this.$router.push({ path: '/signin' });
+    },
+  },
 };
 </script>
