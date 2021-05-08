@@ -6,6 +6,13 @@
       <v-text-field label="password"></v-text-field>
       <v-btn>Sign In</v-btn>
     </v-form>
+    <hr class="mt-5" />
+    <v-card-actions>
+      New?
+      <v-btn @click="redirectToRegister()">
+        Create an account
+      </v-btn>
+    </v-card-actions>
   </CardWrapper>
 </template>
 <script>
@@ -13,5 +20,10 @@ import CardWrapper from '../components/CardWrapper';
 export default {
   name: 'Login',
   components: { CardWrapper },
+  methods: {
+    redirectToRegister() {
+      this.$router.push({ path: '/register' });
+    },
+  },
 };
 </script>
