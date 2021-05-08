@@ -1,9 +1,10 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
-import Login from '../views/Login.vue';
 
 Vue.use(VueRouter);
+
+const lazy = (view) => () => import(`@/views/${view}.vue`);
 
 const routes = [
   {
@@ -13,8 +14,13 @@ const routes = [
   },
   {
     path: '/signin',
-    name: 'SignIn',
-    component: Login,
+    name: 'signin',
+    component: lazy('Login'),
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: lazy('Register'),
   },
 ];
 
