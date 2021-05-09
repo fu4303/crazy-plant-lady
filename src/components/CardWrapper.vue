@@ -2,7 +2,7 @@
   <v-container>
     <v-row class="mb-6" no-gutters>
       <v-col md="6" offset-md="3">
-        <v-card elevation="5" class="pa-5">
+        <v-card elevation="10" class="pa-5 mt-3">
           <slot></slot>
         </v-card>
       </v-col>
