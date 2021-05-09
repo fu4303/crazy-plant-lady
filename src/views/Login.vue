@@ -1,15 +1,28 @@
 <template>
   <CardWrapper>
     <v-card-title class="text-h5">Sign In</v-card-title>
-    <v-form ref="form" lazy-validation>
-      <v-text-field label="email" v-model="email"></v-text-field>
-      <v-text-field label="password" v-model="password"></v-text-field>
-      <v-btn @click="signIn()">Sign In</v-btn>
+    <v-form ref="form" v-model="isValid">
+      <v-text-field
+        label="email"
+        v-model="email"
+        :rules="emailRules"
+        required
+      ></v-text-field>
+      <v-text-field
+        label="password"
+        v-model="password"
+        :rules="passwordRules"
+        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+        :type="showPassword ? 'text' : 'password'"
+        @click:append="showPassword = !showPassword"
+        required
+      ></v-text-field>
+      <v-btn class="mt-2" @click="validate()">Sign In</v-btn>
     </v-form>
     <hr class="mt-5" />
-    <v-card-actions>
-      New?
-      <v-btn @click="redirectToRegister()">
+    <v-card-actions class="mt-2">
+      New to CrazyPlantPerson?
+      <v-btn class="ml-1" @click="redirectToRegister()">
         Create an account
       </v-btn>
     </v-card-actions>
@@ -25,12 +38,26 @@ export default {
     return {
       email: null,
       password: null,
-      validationErrors: [],
+      showPassword: false,
+      emailRules: [
+        (value) => !!value || 'E-mail is required',
+        (value) => /.+@.+/.test(value) || 'Please enter a valid email address',
+      ],
+      passwordRules: [
+        (value) =>
+          !!value || 'Oops...looks like you forgot to enter a password',
+      ],
       firebaseError: '',
     };
   },
   methods: {
     ...mapActions(['signInAction']),
+    validate() {
+      const isValid = this.$refs.form.validate();
+      if (isValid) {
+        this.signIn();
+      }
+    },
     signIn() {
       this.signInAction({ email: this.email, password: this.password });
     },
