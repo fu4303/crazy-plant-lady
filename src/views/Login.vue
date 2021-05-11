@@ -55,11 +55,8 @@ export default {
     validate() {
       const isValid = this.$refs.form.validate();
       if (isValid) {
-        this.signIn();
+        this.signInAction({ email: this.email, password: this.password });
       }
-    },
-    signIn() {
-      this.signInAction({ email: this.email, password: this.password });
     },
     redirectToRegister() {
       this.$router.push({ path: '/register' });
