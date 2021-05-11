@@ -1,11 +1,33 @@
 <template>
   <CardWrapper>
     <v-card-title class="text-h5">Register</v-card-title>
-    <v-form ref="form" lazy-validation>
-      <v-text-field label="email" v-model="email"></v-text-field>
-      <v-text-field label="password" v-model="password"></v-text-field>
-      <v-text-field label="re-enter password"></v-text-field>
-      <v-btn @click="signup()">Create Account</v-btn>
+    <v-form ref="form" v-model="isValid" lazy-validation>
+      <v-text-field
+        label="email"
+        v-model="email"
+        :rules="emailRules"
+        required
+        @keyup="validateForm"
+      ></v-text-field>
+      <v-text-field
+        label="password"
+        v-model="password"
+        :rules="passwordRules"
+        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+        :type="showPassword ? 'text' : 'password'"
+        @click:append="showPassword = !showPassword"
+        required
+      ></v-text-field>
+      <v-text-field
+        label="re-enter password"
+        v-model="reenterPassword"
+        :rules="reenterPasswordRules"
+        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+        :type="showReenterPassword ? 'text' : 'password'"
+        @click:append="showReenterPassword = !showReenterPassword"
+        required
+      ></v-text-field>
+      <v-btn @click="signup()" :disabled="!validated">Create Account</v-btn>
     </v-form>
   </CardWrapper>
 </template>
@@ -17,16 +39,58 @@ export default {
   components: { CardWrapper },
   data() {
     return {
+      isValid: false,
+      validated: false,
       email: null,
       password: null,
-      passwordRepeat: null,
-      validationErrors: [],
+      reenterPassword: null,
+      showPassword: false,
+      showReenterPassword: false,
+      emailRules: [
+        (value) => !!value || 'E-mail is required',
+        (value) =>
+          (value && /.+@.+/.test(value)) ||
+          'Please enter a valid email address',
+      ],
+      passwordRules: [
+        (value) =>
+          !!value || 'Oops...looks like you forgot to enter a password',
+        (value) =>
+          (value && value.length > 7) ||
+          'password must be at least 8 characters long',
+        (value) =>
+          (value && /(?=.*[a-z])/.test(value)) ||
+          'Password must contain at least 1 lowercase character (a-z)',
+        (value) =>
+          (value && /(?=.*[A-Z])/.test(value)) ||
+          'Password must contain at least 1 uppercase character (A-Z)',
+        (value) =>
+          (value && /(?=.*\d)/.test(value)) ||
+          'Password must contain at least 1 digit',
+        (value) =>
+          (value && /(?=.*[-+_!@#$%^&*.,?])/.test(value)) ||
+          'Password must contain at least 1 special character',
+      ],
+      reenterPasswordRules: [
+        (value) => !!value || 'Please verify your password',
+        (value) =>
+          (value && value === this.password) || 'Password does not match',
+      ],
+      firebaseError: '',
     };
   },
   methods: {
     ...mapActions(['signUpAction']),
     signup() {
-      this.signupAction({ email: this.email, password: this.password });
+      this.signUpAction({ email: this.email, password: this.password });
+    },
+    isFormValid() {
+      return this.isValid === true;
+    },
+    validateForm() {
+      const valid = this.$refs.form.validate();
+      this.isValid = valid;
+      this.validated = valid;
     },
   },
 };
