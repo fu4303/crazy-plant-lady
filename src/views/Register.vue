@@ -1,7 +1,7 @@
 <template>
   <CardWrapper>
     <v-card-title class="text-h5">Register</v-card-title>
-    <v-form ref="form" v-model="isValid" lazy-validation>
+    <v-form ref="form" v-model="isValid">
       <v-text-field
         label="email"
         v-model="email"
@@ -17,6 +17,7 @@
         :type="showPassword ? 'text' : 'password'"
         @click:append="showPassword = !showPassword"
         required
+        @keyup="validateForm"
       ></v-text-field>
       <v-text-field
         label="re-enter password"
@@ -26,6 +27,7 @@
         :type="showReenterPassword ? 'text' : 'password'"
         @click:append="showReenterPassword = !showReenterPassword"
         required
+        @keyup="validateForm"
       ></v-text-field>
       <v-btn @click="signup()" :disabled="!validated">Create Account</v-btn>
     </v-form>
@@ -88,9 +90,11 @@ export default {
       return this.isValid === true;
     },
     validateForm() {
-      const valid = this.$refs.form.validate();
-      this.isValid = valid;
-      this.validated = valid;
+      setTimeout(() => {
+        const valid = this.$refs.form.validate();
+        this.isValid = valid;
+        this.validated = valid;
+      }, 600);
     },
   },
 };

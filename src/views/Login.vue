@@ -11,6 +11,7 @@
       <v-text-field
         label="password"
         v-model="password"
+        :error-messages="getError"
         :rules="passwordRules"
         :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
         :type="showPassword ? 'text' : 'password'"
@@ -30,12 +31,13 @@
 </template>
 <script>
 import CardWrapper from '../components/CardWrapper';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 export default {
   name: 'Login',
   components: { CardWrapper },
   data() {
     return {
+      isValid: false,
       email: null,
       password: null,
       showPassword: false,
@@ -50,12 +52,18 @@ export default {
       firebaseError: '',
     };
   },
+  computed: {
+    ...mapGetters(['getUser', 'isUserAuth', 'getError']),
+  },
   methods: {
     ...mapActions(['signInAction']),
-    validate() {
-      const isValid = this.$refs.form.validate();
-      if (isValid) {
-        this.signInAction({ email: this.email, password: this.password });
+    async validate() {
+      const isFormValid = this.$refs.form.validate();
+      if (isFormValid) {
+        await this.signInAction({ email: this.email, password: this.password });
+        if (this.isUserAuth) {
+          this.$router.push({ path: '/' });
+        }
       }
     },
     redirectToRegister() {
