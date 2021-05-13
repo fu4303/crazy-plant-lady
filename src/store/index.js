@@ -5,7 +5,7 @@ import firebase from 'firebase/app';
 Vue.use(Vuex);
 
 const initialState = () => {
-  return { user: null, error: null };
+  return { user: null, error: null, isUserAuthenticated: false };
 };
 export default new Vuex.Store({
   state: initialState(),
@@ -16,6 +16,9 @@ export default new Vuex.Store({
     setError(state, payload) {
       state.error = payload;
     },
+    setUserAuth(state, payload) {
+      state.isUserAuthenticated = payload;
+    }
   },
   actions: {
     signUpAction({ commit }, payload) {
@@ -47,7 +50,7 @@ export default new Vuex.Store({
       return state.user;
     },
     isUserAuth(state) {
-      return !!state.user;
+      return state.isUserAuthenticated;
     },
     getError(state) {
       return state.error;

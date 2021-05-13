@@ -30,10 +30,10 @@
   </CardWrapper>
 </template>
 <script>
-import CardWrapper from '../components/CardWrapper';
-import { mapActions, mapGetters } from 'vuex';
+import CardWrapper from "../components/CardWrapper";
+import { mapActions, mapGetters } from "vuex";
 export default {
-  name: 'Login',
+  name: "Login",
   components: { CardWrapper },
   data() {
     return {
@@ -42,32 +42,33 @@ export default {
       password: null,
       showPassword: false,
       emailRules: [
-        (value) => !!value || 'E-mail is required',
-        (value) => /.+@.+/.test(value) || 'Please enter a valid email address',
+        (value) => !!value || "E-mail is required",
+        (value) => /.+@.+/.test(value) || "Please enter a valid email address",
       ],
       passwordRules: [
         (value) =>
-          !!value || 'Oops...looks like you forgot to enter a password',
+          !!value || "Oops...looks like you forgot to enter a password",
       ],
-      firebaseError: '',
+      firebaseError: "",
     };
   },
   computed: {
-    ...mapGetters(['getUser', 'isUserAuth', 'getError']),
+    ...mapGetters(["getUser", "getError"]),
   },
   methods: {
-    ...mapActions(['signInAction']),
+    ...mapActions(["signInAction"]),
     async validate() {
       const isFormValid = this.$refs.form.validate();
       if (isFormValid) {
         await this.signInAction({ email: this.email, password: this.password });
-        if (this.isUserAuth) {
-          this.$router.push({ path: '/' });
+        if (!this.getError) {
+          this.$store.commit("setUserAuth", true);
+          this.$router.replace({ name: "Home" });
         }
       }
     },
     redirectToRegister() {
-      this.$router.push({ path: '/register' });
+      this.$router.push({ path: "/register" });
     },
   },
 };
