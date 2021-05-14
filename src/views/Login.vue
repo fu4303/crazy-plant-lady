@@ -1,6 +1,5 @@
 <template>
-  <CardWrapper>
-    <v-card-title class="text-h5">Sign In</v-card-title>
+  <CardWrapper headertext="Sign In">
     <v-form ref="form" v-model="isValid">
       <v-text-field
         label="email"
