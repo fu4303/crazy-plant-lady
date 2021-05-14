@@ -18,12 +18,12 @@
         @click:append="showPassword = !showPassword"
         required
       ></v-text-field>
-      <v-btn class="mt-2" @click="validate()">Sign In</v-btn>
+      <v-btn class="mt-2" @click="validate()" color="accent">Sign In</v-btn>
     </v-form>
     <hr class="mt-5" />
     <v-card-actions class="mt-2">
       New to CrazyPlantPerson?
-      <v-btn class="ml-1" @click="redirectToRegister()">
+      <v-btn class="ml-1" @click="redirectToRegister()" color="accent">
         Create an account
       </v-btn>
     </v-card-actions>
