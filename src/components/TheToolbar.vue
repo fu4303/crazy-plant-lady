@@ -1,8 +1,7 @@
 <template>
-  <v-toolbar dense color="primary">
+  <v-toolbar color="primary">
     <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
-    <v-toolbar-title>CrazyPlantPerson</v-toolbar-title>
+    <v-img src="@/assets/cpp.png" max-height="110" max-width="227"></v-img>
 
     <v-spacer></v-spacer>
     <v-btn @click="redirectToLogin()" v-if="!isUserAuth" color="accent"

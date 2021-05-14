@@ -1,6 +1,5 @@
 <template>
-  <CardWrapper>
-    <v-card-title class="text-h5">Register</v-card-title>
+  <CardWrapper headertext="Register">
     <v-form ref="form" v-model="isValid">
       <v-text-field
         label="email"
@@ -34,10 +33,10 @@
   </CardWrapper>
 </template>
 <script>
-import CardWrapper from '../components/CardWrapper';
-import { mapActions } from 'vuex';
+import CardWrapper from "../components/CardWrapper";
+import { mapActions } from "vuex";
 export default {
-  name: 'Register',
+  name: "Register",
   components: { CardWrapper },
   data() {
     return {
@@ -49,40 +48,40 @@ export default {
       showPassword: false,
       showReenterPassword: false,
       emailRules: [
-        (value) => !!value || 'E-mail is required',
+        (value) => !!value || "E-mail is required",
         (value) =>
           (value && /.+@.+/.test(value)) ||
-          'Please enter a valid email address',
+          "Please enter a valid email address",
       ],
       passwordRules: [
         (value) =>
-          !!value || 'Oops...looks like you forgot to enter a password',
+          !!value || "Oops...looks like you forgot to enter a password",
         (value) =>
           (value && value.length > 7) ||
-          'password must be at least 8 characters long',
+          "password must be at least 8 characters long",
         (value) =>
           (value && /(?=.*[a-z])/.test(value)) ||
-          'Password must contain at least 1 lowercase character (a-z)',
+          "Password must contain at least 1 lowercase character (a-z)",
         (value) =>
           (value && /(?=.*[A-Z])/.test(value)) ||
-          'Password must contain at least 1 uppercase character (A-Z)',
+          "Password must contain at least 1 uppercase character (A-Z)",
         (value) =>
           (value && /(?=.*\d)/.test(value)) ||
-          'Password must contain at least 1 digit',
+          "Password must contain at least 1 digit",
         (value) =>
           (value && /(?=.*[-+_!@#$%^&*.,?])/.test(value)) ||
-          'Password must contain at least 1 special character',
+          "Password must contain at least 1 special character",
       ],
       reenterPasswordRules: [
-        (value) => !!value || 'Please verify your password',
+        (value) => !!value || "Please verify your password",
         (value) =>
-          (value && value === this.password) || 'Password does not match',
+          (value && value === this.password) || "Password does not match",
       ],
-      firebaseError: '',
+      firebaseError: "",
     };
   },
   methods: {
-    ...mapActions(['signUpAction']),
+    ...mapActions(["signUpAction"]),
     signup() {
       this.signUpAction({ email: this.email, password: this.password });
     },
