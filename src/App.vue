@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <v-main>
+      <TheSideNav></TheSideNav>
       <TheToolbar></TheToolbar>
       <router-view />
       <section v-if="isUserAuth" class="section">
@@ -15,15 +16,17 @@
 </template>
 
 <script>
-import TheToolbar from './components/TheToolbar';
-import { mapGetters } from 'vuex';
+import TheToolbar from "./components/TheToolbar";
+import TheSideNav from "./components/TheSideNav";
+import { mapGetters } from "vuex";
 export default {
-  name: 'App',
+  name: "App",
   components: {
     TheToolbar,
+    TheSideNav,
   },
   computed: {
-    ...mapGetters(['getUser', 'isUserAuth']),
+    ...mapGetters(["getUser", "isUserAuth"]),
   },
   data: () => ({
     //
