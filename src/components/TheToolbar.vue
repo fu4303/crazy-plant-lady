@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar color="primary">
+  <v-app-bar color="primaryOne">
     <v-app-bar-nav-icon
       @click="openNavigation"
       v-if="!drawerState"

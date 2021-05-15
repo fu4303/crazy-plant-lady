@@ -2,7 +2,7 @@
   <v-navigation-drawer
     app
     height="100vh"
-    color="secondary"
+    color="secondaryOne"
     temporary
     v-model="drawerState"
     @mouseleave.native="toggleSidenav"
