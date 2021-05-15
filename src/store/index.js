@@ -10,6 +10,7 @@ const initialState = () => {
     user: null,
     error: null,
     isUserAuthenticated: false,
+    theme: "light",
   };
 };
 export default new Vuex.Store({
@@ -26,6 +27,9 @@ export default new Vuex.Store({
     },
     setUserAuth(state, payload) {
       state.isUserAuthenticated = payload;
+    },
+    setCurrentTheme(state, data) {
+      state.theme = data;
     },
   },
   actions: {
@@ -63,6 +67,7 @@ export default new Vuex.Store({
   },
   modules: {},
   getters: {
+    theme: (state) => state.theme,
     drawerState: (state) => state.drawerState,
     getUser: (state) => state.user,
     isUserAuth: (state) => state.isUserAuthenticated,
