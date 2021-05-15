@@ -28,7 +28,9 @@
         required
         @keyup="validateForm"
       ></v-text-field>
-      <v-btn @click="signup()" :disabled="!validated">Create Account</v-btn>
+      <v-btn @click="signup()" :disabled="!validated" color="accent"
+        >Create Account</v-btn
+      >
     </v-form>
   </CardWrapper>
 </template>

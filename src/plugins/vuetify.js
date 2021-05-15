@@ -8,8 +8,10 @@ export default new Vuetify({
   theme: {
     themes: {
       light: {
-        primary: colors.green.lighten4,
-        secondary: colors.cyan.lighten5,
+        primaryOne: colors.green.lighten4,
+        primaryTwo: colors.blue.lighten4,
+        secondaryOne: colors.cyan.lighten5,
+        secondaryTwo: colors.purple.lighten4,
         accent: colors.blueGrey.darken1,
         error: colors.red.accent3,
       },
