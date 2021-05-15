@@ -1,6 +1,6 @@
 <template>
   <v-toolbar color="primary">
-    <v-app-bar-nav-icon></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon @click="openNavigation"></v-app-bar-nav-icon>
     <v-img src="@/assets/cpp.png" max-height="110" max-width="227"></v-img>
 
     <v-spacer></v-spacer>
@@ -20,9 +20,12 @@ export default {
     redirectToLogin() {
       this.$router.push({ path: "/signin" });
     },
+    openNavigation() {
+      this.$store.commit("toggleDrawerState", !this.drawerState);
+    },
   },
   computed: {
-    ...mapGetters(["isUserAuth"]),
+    ...mapGetters(["isUserAuth", "drawerState"]),
   },
 };
 </script>

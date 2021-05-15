@@ -1,15 +1,23 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import firebase from 'firebase/app';
+import Vue from "vue";
+import Vuex from "vuex";
+import firebase from "firebase/app";
 
 Vue.use(Vuex);
 
 const initialState = () => {
-  return { user: null, error: null, isUserAuthenticated: false };
+  return {
+    drawerState: false,
+    user: null,
+    error: null,
+    isUserAuthenticated: false,
+  };
 };
 export default new Vuex.Store({
   state: initialState(),
   mutations: {
+    toggleDrawerState(state, payload) {
+      state.drawerState = payload;
+    },
     setUser(state, payload) {
       state.user = payload;
     },
@@ -18,7 +26,7 @@ export default new Vuex.Store({
     },
     setUserAuth(state, payload) {
       state.isUserAuthenticated = payload;
-    }
+    },
   },
   actions: {
     signUpAction({ commit }, payload) {
@@ -26,10 +34,10 @@ export default new Vuex.Store({
         .auth()
         .createUserWithEmailAndPassword(payload.email, payload.password)
         .then((response) => {
-          commit('setUser', response.user);
+          commit("setUser", response.user);
         })
         .catch((error) => {
-          commit('setError', error.message);
+          commit("setError", error.message);
         });
     },
     signInAction({ commit }, payload) {
@@ -37,23 +45,18 @@ export default new Vuex.Store({
         .auth()
         .signInWithEmailAndPassword(payload.email, payload.password)
         .then((response) => {
-          commit('setUser', response.user);
+          commit("setUser", response.user);
         })
         .catch((error) => {
-          commit('setError', error.message);
+          commit("setError", error.message);
         });
     },
   },
   modules: {},
   getters: {
-    getUser(state) {
-      return state.user;
-    },
-    isUserAuth(state) {
-      return state.isUserAuthenticated;
-    },
-    getError(state) {
-      return state.error;
-    },
+    drawerState: (state) => state.drawerState,
+    getUser: (state) => state.user,
+    isUserAuth: (state) => state.isUserAuthenticated,
+    getError: (state) => state.error,
   },
 });
