@@ -1,6 +1,10 @@
 <template>
-  <v-navigation-drawer app v-model="drawerState">
-    <v-list-item>
+  <v-navigation-drawer
+    app
+    v-model="drawerState"
+    @mouseout.native="toggleSidenav"
+  >
+    <v-list-item @click="redirectToLogin()" v-if="!isUserAuth" color="accent">
       <v-list-item-content>
         <v-list-item-title>
           Sign In
@@ -13,16 +17,26 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "TheSideNav",
   computed: {
+    ...mapGetters(["isUserAuth"]),
     drawerState: {
       get() {
         return this.$store.getters.drawerState;
       },
-      set(v) {
-        return this.$store.commit("toggleDrawerState", v);
+      set(toggle) {
+        return this.$store.commit("toggleDrawerState", toggle);
       },
+    },
+  },
+  methods: {
+    redirectToLogin() {
+      this.$router.push({ path: "/signin" });
+    },
+    toggleSidenav() {
+      this.$store.commit("toggleDrawerState", false);
     },
   },
 };
