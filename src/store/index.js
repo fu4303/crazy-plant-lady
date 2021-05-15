@@ -51,6 +51,15 @@ export default new Vuex.Store({
           commit("setError", error.message);
         });
     },
+    async signOutAction({ commit }) {
+      try {
+        await firebase.auth().signOut();
+        commit("setUser", null);
+        commit("setUserAuth", false);
+      } catch (err) {
+        commit("setError", err.message);
+      }
+    },
   },
   modules: {},
   getters: {
