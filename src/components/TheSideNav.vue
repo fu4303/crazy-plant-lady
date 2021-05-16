@@ -7,23 +7,33 @@
     v-model="drawerState"
     @mouseleave.native="toggleSidenav"
   >
-    <v-list-item @click="redirectToLogin()" v-if="!isUserAuth" color="accent">
-      <v-list-item-content>
-        <v-list-item-title>
-          Sign In
-        </v-list-item-title>
-      </v-list-item-content>
-    </v-list-item>
+    <v-list v-if="!isUserAuth">
+      <v-list-item @click="redirectToLogin()">
+        <v-list-item-content>
+          <v-list-item-title>
+            Sign In
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
 
-    <v-list-item @click="signOut()" v-if="isUserAuth" color="error">
-      <v-list-item-content>
-        <v-list-item-title>
-          Sign Out
-        </v-list-item-title>
-      </v-list-item-content>
-    </v-list-item>
-
-    <v-divider></v-divider>
+    <v-list v-if="isUserAuth">
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title>
+            {{ getUser.email }}
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-divider></v-divider>
+      <v-list-item @click="signOut()">
+        <v-list-item-content>
+          <v-list-item-title>
+            Sign Out
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
   </v-navigation-drawer>
 </template>
 
@@ -32,7 +42,7 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   name: "TheSideNav",
   computed: {
-    ...mapGetters(["isUserAuth"]),
+    ...mapGetters(["getUser", "isUserAuth"]),
     drawerState: {
       get() {
         return this.$store.getters.drawerState;

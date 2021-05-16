@@ -4,13 +4,6 @@
       <TheSideNav></TheSideNav>
       <TheToolbar></TheToolbar>
       <router-view />
-      <section v-if="isUserAuth" class="section">
-        <div class="columns">
-          <div class="column is-half is-offset-one-quarter">
-            Welcome {{ getUser.email }}
-          </div>
-        </div>
-      </section>
     </v-main>
   </v-app>
 </template>
