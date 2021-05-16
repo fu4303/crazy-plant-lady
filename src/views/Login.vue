@@ -62,7 +62,8 @@ export default {
         await this.signInAction({ email: this.email, password: this.password });
         if (!this.getError) {
           this.$store.commit("setUserAuth", true);
-          this.$router.replace({ name: "Home" });
+          this.$router.push({ path: "/home/dashboard" });
+          // this.$router.replace({ name: "Home" });
         }
       }
     },

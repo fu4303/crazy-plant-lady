@@ -1,8 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "../store";
-import Home from "../views/UserHome.vue";
+import Home from "@/views/user/UserHome.vue";
 import Welcome from "../views/Welcome.vue";
+import PlantLog from "@/views/user/PlantLog.vue";
+import UserDashboard from "@/views/user/UserDashboard.vue";
 
 Vue.use(VueRouter);
 
@@ -25,6 +27,22 @@ const routes = [
         next();
       }
     },
+    children: [
+      {
+        path: "",
+        redirect: "dashboard",
+      },
+      {
+        path: "plantlog",
+        name: "Plant Log",
+        component: PlantLog,
+      },
+      {
+        path: "dashboard",
+        name: "Dashboard",
+        component: UserDashboard,
+      },
+    ],
   },
   {
     path: "/signin",

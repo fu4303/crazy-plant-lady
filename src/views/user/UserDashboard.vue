@@ -18,9 +18,9 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { getCurrentDate } from "../utils/DateUtil";
+import { getCurrentDate } from "@/utils/DateUtil";
 export default {
-  name: "Home",
+  name: "UserDashboard",
   data() {
     return {
       lastSignIn: null,
@@ -42,3 +42,5 @@ export default {
   },
 };
 </script>
+
+<style></style>
