@@ -11,6 +11,7 @@ const initialState = () => {
     error: null,
     isUserAuthenticated: false,
     theme: "light",
+    plantLogEntries: [],
   };
 };
 export default new Vuex.Store({
@@ -64,6 +65,9 @@ export default new Vuex.Store({
         commit("setError", err.message);
       }
     },
+    addPlantToLog({ commit }, payload) {
+      console.log(payload);
+    },
   },
   modules: {},
   getters: {
@@ -72,5 +76,6 @@ export default new Vuex.Store({
     getUser: (state) => state.user,
     isUserAuth: (state) => state.isUserAuthenticated,
     getError: (state) => state.error,
+    plantLogEntries: (state) => state.plantLogEntries,
   },
 });
