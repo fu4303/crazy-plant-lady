@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import TheToolbar from "./components/TheToolbar";
-import TheSideNav from "./components/TheSideNav";
+import TheToolbar from "./components/single-instance/TheToolbar";
+import TheSideNav from "./components/single-instance/TheSideNav";
 import { mapGetters } from "vuex";
 export default {
   name: "App",

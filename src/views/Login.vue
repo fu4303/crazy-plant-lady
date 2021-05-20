@@ -1,6 +1,6 @@
 <template>
   <CardWrapper headertext="Sign In">
-    <v-form ref="form" v-model="isValid">
+    <v-form ref="form" v-model="isValid" @keyup.enter.native="validate()">
       <v-text-field
         label="email"
         v-model="email"
