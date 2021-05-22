@@ -106,13 +106,13 @@ export default {
 .nav-item:hover {
   background-color: $primary;
   .nav-item-title {
-    color: darken($primary-font-color, 10) !important;
+    color: darken($dark-gray, 10) !important;
   }
 }
 .activeNavItem {
   background-color: lighten($primary, 10) !important;
   .nav-item-title {
-    color: darken($primary-font-color, 5);
+    color: darken($dark-gray, 5);
   }
 }
 </style>
