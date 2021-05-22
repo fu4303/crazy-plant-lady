@@ -32,6 +32,9 @@ export default new Vuex.Store({
     setCurrentTheme(state, data) {
       state.theme = data;
     },
+    addPlantToLog(state, data) {
+      state.plantLogEntries = [...state.plantLogEntries, data];
+    },
   },
   actions: {
     signUpAction({ commit }, payload) {
@@ -66,7 +69,7 @@ export default new Vuex.Store({
       }
     },
     addPlantToLog({ commit }, payload) {
-      console.log(payload);
+      commit("addPlantToLog", payload);
     },
   },
   modules: {},
