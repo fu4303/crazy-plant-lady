@@ -2,13 +2,14 @@
   <v-data-table
     dense
     :headers="headers"
-    :items="plants"
+    :items="plantLogEntries"
     item-key="name"
     class="elevation-1"
   ></v-data-table>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "PlantLogTable",
   data() {
@@ -18,13 +19,13 @@ export default {
           text: "Plant Name",
           align: "start",
           sortable: false,
-          value: "name",
+          value: "plantName",
         },
         {
           text: "Plant Type",
           align: "start",
           sortable: false,
-          value: "type",
+          value: "plantType",
         },
         {
           text: "Date Acquired",
@@ -35,6 +36,9 @@ export default {
       ],
       plants: [],
     };
+  },
+  computed: {
+    ...mapGetters(["plantLogEntries"]),
   },
 };
 </script>

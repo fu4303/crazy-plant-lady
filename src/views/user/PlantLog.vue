@@ -8,7 +8,9 @@
           {{ plantLogEntries.length ? hasPlantsText : noPlantsText }}
         </v-col>
         <v-col>
-          <v-btn elevation="10" fab><v-icon>mdi-pencil</v-icon></v-btn>
+          <v-btn elevation="10" fab @click="addPlantToLog"
+            ><v-icon>mdi-pencil</v-icon></v-btn
+          >
         </v-col>
       </v-row>
       <v-row>
@@ -38,6 +40,16 @@ export default {
   },
   computed: {
     ...mapGetters(["plantLogEntries"]),
+  },
+  methods: {
+    addPlantToLog() {
+      const newPlant = {
+        plantName: "-",
+        plantType: "-",
+        dateAcquired: "-",
+      };
+      this.$store.dispatch("addPlantToLog", newPlant);
+    },
   },
 };
 </script>
