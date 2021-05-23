@@ -48,6 +48,7 @@ export default new Vuex.Store({
           commit("setError", error.message);
         });
     },
+
     signInAction({ commit }, payload) {
       return firebase
         .auth()
@@ -59,6 +60,7 @@ export default new Vuex.Store({
           commit("setError", error.message);
         });
     },
+
     async signOutAction({ commit }) {
       try {
         await firebase.auth().signOut();
@@ -68,6 +70,7 @@ export default new Vuex.Store({
         commit("setError", err.message);
       }
     },
+
     async addPlantToLog({ commit }, payload) {
       await firebase
         .firestore()
@@ -79,6 +82,29 @@ export default new Vuex.Store({
           createdAt: new Date(),
         });
       commit("addPlantToLog", payload);
+    },
+
+    async getAllPlants({ commit }) {
+      const plants = [];
+      const firebasePlantsRef = await firebase
+        .firestore()
+        .collection("users")
+        .doc(firebase.auth().currentUser.uid)
+        .collection("plants");
+
+      firebasePlantsRef
+        .get()
+        .then((querySnapShot) => {
+          querySnapShot.forEach((doc) => {
+            const plant = doc.data();
+            plant.id = doc.id;
+            plants.push(plant);
+          });
+          commit("addPlantToLog", ...plants);
+        })
+        .catch((error) => {
+          console.log("Error getting document:", error);
+        });
     },
   },
   modules: {},

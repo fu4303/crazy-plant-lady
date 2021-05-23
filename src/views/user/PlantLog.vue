@@ -48,6 +48,9 @@ export default {
       this.$store.dispatch("addPlantToLog", newPlant);
     },
   },
+  mounted() {
+    this.$store.dispatch("getAllPlants");
+  },
 };
 </script>
 
