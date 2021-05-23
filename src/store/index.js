@@ -68,7 +68,16 @@ export default new Vuex.Store({
         commit("setError", err.message);
       }
     },
-    addPlantToLog({ commit }, payload) {
+    async addPlantToLog({ commit }, payload) {
+      await firebase
+        .firestore()
+        .collection("users")
+        .doc(firebase.auth().currentUser.uid)
+        .collection("plants")
+        .add({
+          ...payload,
+          createdAt: new Date(),
+        });
       commit("addPlantToLog", payload);
     },
   },
