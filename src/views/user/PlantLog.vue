@@ -8,8 +8,8 @@
           {{ plantLogEntries.length ? hasPlantsText : noPlantsText }}
         </v-col>
         <v-col>
-          <v-btn elevation="10" fab @click="addPlantToLog"
-            ><v-icon>mdi-pencil</v-icon></v-btn
+          <v-btn elevation="10" fab color="primary" @click="addPlantToLog"
+            ><v-icon>mdi-plus</v-icon></v-btn
           >
         </v-col>
       </v-row>

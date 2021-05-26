@@ -33,11 +33,9 @@ export default {
     parseLastSignInTime() {
       const unixTime = Date.parse(this.getUser.metadata.lastSignInTime);
       this.lastSignIn = getCurrentDate(unixTime);
-      console.log(this.lastSignIn);
     },
   },
   mounted: function() {
-    console.log(this.getUser.metadata.lastSignInTime);
     this.parseLastSignInTime();
   },
 };
