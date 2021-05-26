@@ -17,11 +17,51 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="item in plantLogEntries" :key="item.plantName">
-        <td>{{ item.plantName }}</td>
-        <td>{{ item.plantType }}</td>
-        <td>{{ item.dateAcquired }}</td>
-        <td>edit</td>
+      <tr v-for="item in plantLogEntries" :key="item.id">
+        <template>
+          <td>
+            <v-text-field
+              v-model="item.plantName"
+              :rules="rules"
+              hide-details="auto"
+              dense
+              :filled="isEditRowMode(item)"
+              :readonly="!isEditRowMode(item)"
+              :disabled="!isEditRowMode(item)"
+            ></v-text-field>
+          </td>
+          <td>
+            <v-text-field
+              v-model="item.plantType"
+              :rules="rules"
+              hide-details="auto"
+              dense
+              :filled="isEditRowMode(item)"
+              :readonly="!isEditRowMode(item)"
+              :disabled="!isEditRowMode(item)"
+            ></v-text-field>
+          </td>
+          <td>
+            <v-text-field
+              v-model="item.dateAcquired"
+              :rules="rules"
+              hide-details="auto"
+              dense
+              :filled="isEditRowMode(item)"
+              :readonly="!isEditRowMode(item)"
+              :disabled="!isEditRowMode(item)"
+            ></v-text-field>
+          </td>
+        </template>
+
+        <td>
+          <v-btn v-if="!isEditRowMode(item)" icon @click="editItem(item)">
+            <v-icon>mdi-pencil</v-icon>
+          </v-btn>
+          <v-btn v-if="isEditRowMode(item)" icon @click="saveItem(item)">
+            <v-icon>mdi-content-save</v-icon>
+          </v-btn>
+        </td>
       </tr>
     </tbody>
   </v-simple-table>
@@ -33,6 +73,17 @@ export default {
   name: "PlantLogTable",
   data() {
     return {
+      editRow: {
+        editRowId: null,
+        isEditRowMode: false,
+        plantType: null,
+        plantName: null,
+        dateAcquired: null,
+      },
+      rules: [
+        (value) => !!value || "Required.",
+        (value) => (value && value.length >= 3) || "Min 3 characters",
+      ],
       headers: [
         {
           text: "Plant Name",
@@ -59,12 +110,30 @@ export default {
   computed: {
     ...mapGetters(["plantLogEntries"]),
   },
+  mounted() {
+    this.editRowMode = false;
+  },
   methods: {
     editItem(item) {
-      console.log(item);
+      this.editRow.editRowId = item.id;
+      this.editRow.isEditRowMode = true;
+    },
+    saveItem(item) {
+      this.editRow.isEditRowMode = false;
+      this.$store.dispatch("updatePlantEntry", item);
     },
     deleteItem(item) {
       console.log(item);
+    },
+    isEditRowMode(item) {
+      if (
+        this.editRow.editRowId === item.id &&
+        this.editRow.isEditRowMode === true
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
 };

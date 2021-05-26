@@ -35,6 +35,12 @@ export default new Vuex.Store({
     addPlantToLog(state, data) {
       state.plantLogEntries = [...state.plantLogEntries, data];
     },
+    updatePlantLogEntry(state, data) {
+      const plantToUpdate = state.plantLogEntries.find(
+        (item) => item.id === data.id
+      );
+      Object.assign(plantToUpdate, data);
+    },
   },
   actions: {
     signUpAction({ commit }, payload) {
@@ -85,7 +91,6 @@ export default new Vuex.Store({
     },
 
     async getAllPlants({ commit }) {
-      const plants = [];
       const firebasePlantsRef = await firebase
         .firestore()
         .collection("users")
@@ -98,13 +103,26 @@ export default new Vuex.Store({
           querySnapShot.forEach((doc) => {
             const plant = doc.data();
             plant.id = doc.id;
-            plants.push(plant);
+            commit("addPlantToLog", plant);
           });
-          commit("addPlantToLog", ...plants);
         })
         .catch((error) => {
-          console.log("Error getting document:", error);
+          console.warn("Error getting document:", error);
         });
+    },
+    async updatePlantEntry({ commit }, payload) {
+      await firebase
+        .firestore()
+        .collection("users")
+        .doc(firebase.auth().currentUser.uid)
+        .collection("plants")
+        .doc(payload.id)
+        .update({
+          dateAcquired: payload.dateAcquired,
+          plantName: payload.plantName,
+          plantType: payload.plantType,
+        });
+      commit("updatePlantLogEntry", payload);
     },
   },
   modules: {},
