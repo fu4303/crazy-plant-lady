@@ -41,6 +41,12 @@ export default new Vuex.Store({
       );
       Object.assign(plantToUpdate, data);
     },
+    deletePlantLogEntry(state, data) {
+      const filteredPlants = state.plantLogEntries.filter(
+        (plant) => plant.id !== data.id
+      );
+      state.plantLogEntries = filteredPlants;
+    },
   },
   actions: {
     signUpAction({ commit }, payload) {
@@ -123,6 +129,17 @@ export default new Vuex.Store({
           plantType: payload.plantType,
         });
       commit("updatePlantLogEntry", payload);
+    },
+    async deletePlantEntry({ commit }, payload) {
+      await firebase
+        .firestore()
+        .collection("users")
+        .doc(firebase.auth().currentUser.uid)
+        .collection("plants")
+        .doc(payload.id)
+        .delete();
+
+      commit("deletePlantLogEntry", payload);
     },
   },
   modules: {},

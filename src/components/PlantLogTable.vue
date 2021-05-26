@@ -61,6 +61,9 @@
           <v-btn v-if="isEditRowMode(item)" icon @click="saveItem(item)">
             <v-icon>mdi-content-save</v-icon>
           </v-btn>
+          <v-btn icon @click="deleteItem(item)">
+            <v-icon>mdi-delete</v-icon>
+          </v-btn>
         </td>
       </tr>
     </tbody>
@@ -104,7 +107,6 @@ export default {
           value: "dateAcquired",
         },
       ],
-      plants: [],
     };
   },
   computed: {
@@ -112,6 +114,8 @@ export default {
   },
   mounted() {
     this.editRowMode = false;
+    if (this.plantLogEntries && this.plantLogEntries.length > 0) return;
+    this.$store.dispatch("getAllPlants"); // already fetched.
   },
   methods: {
     editItem(item) {
@@ -123,7 +127,7 @@ export default {
       this.$store.dispatch("updatePlantEntry", item);
     },
     deleteItem(item) {
-      console.log(item);
+      this.$store.dispatch("deletePlantEntry", item);
     },
     isEditRowMode(item) {
       if (
