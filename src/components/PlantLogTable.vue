@@ -42,15 +42,28 @@
             ></v-text-field>
           </td>
           <td>
-            <v-text-field
-              v-model="item.dateAcquired"
-              :rules="rules"
-              hide-details="auto"
-              dense
-              :filled="isEditRowMode(item)"
-              :readonly="!isEditRowMode(item)"
-              :disabled="!isEditRowMode(item)"
-            ></v-text-field>
+            <template>
+              <vc-date-picker
+                class="inline-block h-full"
+                v-model="item.dateAcquired"
+              >
+                <template v-slot="{ inputValue, togglePopover }">
+                  <div class="flex items-center">
+                    <v-btn
+                      icon
+                      @click="togglePopover()"
+                      :disabled="!isEditRowMode(item)"
+                      ><v-icon>mdi-calendar-month</v-icon></v-btn
+                    >
+                    <input
+                      :value="inputValue"
+                      class="bg-white text-gray-700 w-full py-1 px-2 appearance-none border rounded-r focus:outline-none focus:border-blue-500"
+                      readonly
+                    />
+                  </div>
+                </template>
+              </vc-date-picker>
+            </template>
           </td>
         </template>
 
@@ -76,12 +89,14 @@ export default {
   name: "PlantLogTable",
   data() {
     return {
+      date: new Date(),
+      showDatePicker: false,
       editRow: {
         editRowId: null,
         isEditRowMode: false,
         plantType: null,
         plantName: null,
-        dateAcquired: null,
+        dateAcquired: new Date(),
       },
       rules: [
         (value) => !!value || "Required.",
@@ -137,6 +152,12 @@ export default {
         return true;
       } else {
         return false;
+      }
+    },
+    selectDateAcquired(item) {
+      if (this.isEditRowMode(item)) {
+        this.showDatePicker = true;
+        console.log("is in edit mode");
       }
     },
   },

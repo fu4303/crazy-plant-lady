@@ -43,7 +43,7 @@ export default {
       const newPlant = {
         plantName: "-",
         plantType: "-",
-        dateAcquired: "-",
+        dateAcquired: new Date(),
       };
       this.$store.dispatch("addPlantToLog", newPlant);
     },
