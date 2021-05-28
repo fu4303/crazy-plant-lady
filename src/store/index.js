@@ -109,6 +109,7 @@ export default new Vuex.Store({
           querySnapShot.forEach((doc) => {
             const plant = doc.data();
             plant.id = doc.id;
+            plant.dateAcquired = plant.dateAcquired.toDate();
             commit("addPlantToLog", plant);
           });
         })
