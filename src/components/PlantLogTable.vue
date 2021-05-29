@@ -2,17 +2,20 @@
   <v-simple-table>
     <thead>
       <tr>
-        <th class="text-left">
+        <th class="text-center">
           Plant Name
         </th>
-        <th class="text-left">
+        <th class="text-center">
           Plant Type
         </th>
-        <th class="text-left">
+        <th class="text-center">
           Date Acquired
         </th>
-        <th class="text-left">
+        <th class="text-center">
           Edit
+        </th>
+        <th class="text-center">
+          Details
         </th>
       </tr>
     </thead>
@@ -76,6 +79,11 @@
           </v-btn>
           <v-btn icon @click="deleteItem(item)">
             <v-icon>mdi-delete</v-icon>
+          </v-btn>
+        </td>
+        <td>
+          <v-btn icon @click="goToDetails(item)">
+            <v-icon>mdi-notebook</v-icon>
           </v-btn>
         </td>
       </tr>
@@ -159,6 +167,12 @@ export default {
         this.showDatePicker = true;
         console.log("is in edit mode");
       }
+    },
+    goToDetails(item) {
+      this.$router.push({
+        name: "plantdetails",
+        params: { id: item.id, plantData: item },
+      });
     },
   },
 };
