@@ -2,21 +2,11 @@
   <v-simple-table>
     <thead>
       <tr>
-        <th class="text-center">
-          Plant Name
-        </th>
-        <th class="text-center">
-          Plant Type
-        </th>
-        <th class="text-center">
-          Date Acquired
-        </th>
-        <th class="text-center">
-          Edit
-        </th>
-        <th class="text-center">
-          Details
-        </th>
+        <th class="text-center">Plant Name</th>
+        <th class="text-center">Plant Type</th>
+        <th class="text-center">Date Acquired</th>
+        <th class="text-center">Edit</th>
+        <th class="text-center">Details</th>
       </tr>
     </thead>
     <tbody>
@@ -60,7 +50,18 @@
                     >
                     <input
                       :value="inputValue"
-                      class="bg-white text-gray-700 w-full py-1 px-2 appearance-none border rounded-r focus:outline-none focus:border-blue-500"
+                      class="
+                        bg-white
+                        text-gray-700
+                        w-full
+                        py-1
+                        px-2
+                        appearance-none
+                        border
+                        rounded-r
+                        focus:outline-none
+                        focus:border-blue-500
+                      "
                       readonly
                     />
                   </div>

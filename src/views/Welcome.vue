@@ -6,12 +6,8 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col>
-        Get Started
-      </v-col>
-      <v-col>
-        Create an Account
-      </v-col>
+      <v-col> Get Started </v-col>
+      <v-col> Create an Account </v-col>
     </v-row>
   </v-container>
 </template>

@@ -155,7 +155,8 @@ export default new Vuex.Store({
 
       plantDetails.get().then((querySnapShot) => {
         querySnapShot.forEach((doc) => {
-          console.log(doc);
+          // console.log(doc);
+          commit("pleaseLinter", doc);
         });
       });
     },
