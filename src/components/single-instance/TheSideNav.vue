@@ -10,9 +10,7 @@
     <v-list v-if="!isUserAuth">
       <v-list-item @click="redirectToLogin()">
         <v-list-item-content>
-          <v-list-item-title>
-            Sign In
-          </v-list-item-title>
+          <v-list-item-title> Sign In </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -29,9 +27,7 @@
 
       <v-list-item @click="signOut()">
         <v-list-item-content>
-          <v-list-item-title>
-            Sign Out
-          </v-list-item-title>
+          <v-list-item-title> Sign Out </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 

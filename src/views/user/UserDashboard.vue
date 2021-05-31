@@ -35,7 +35,7 @@ export default {
       this.lastSignIn = getCurrentDate(unixTime);
     },
   },
-  mounted: function() {
+  mounted: function () {
     this.parseLastSignInTime();
   },
 };

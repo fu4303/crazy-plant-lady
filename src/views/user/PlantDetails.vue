@@ -12,9 +12,7 @@
             @dayclick="onDayClick"
           />
         </v-col>
-        <v-col cols="5">
-          details
-        </v-col>
+        <v-col cols="5"> details </v-col>
       </v-row>
     </v-container>
   </div>
@@ -41,7 +39,7 @@ export default {
     });
   },
   methods: {
-    onDayClick: function() {
+    onDayClick: function () {
       console.log(this.selectedDate);
     },
   },
