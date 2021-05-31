@@ -6,9 +6,9 @@
     <v-container>
       <v-row>
         <v-col cols="7">
-          <vc-calendar
+          <vc-date-picker
+            v-model="selectedDate"
             is-expanded
-            :attributes="attributes"
             @dayclick="onDayClick"
           />
         </v-col>
@@ -21,30 +21,28 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { getDateTextFormat } from "@/utils/DateUtil.js";
 export default {
   name: "PlantDetails",
   props: ["plantData"],
   data() {
     return {
-      days: [],
+      selectedDate: new Date(),
     };
   },
   computed: {
-    dates() {
-      return this.days.map((day) => day.date);
-    },
-    attributes() {
-      return this.dates.map((date) => ({
-        highlight: true,
-        dates: date,
-      }));
-    },
+    ...mapGetters(["plantDetails"]),
+  },
+  mounted() {
+    this.$store.dispatch("getPlantDetailsByDate", {
+      id: this.plantData.id,
+      dateText: getDateTextFormat(this.selectedDate),
+    });
   },
   methods: {
-    onDayClick(day) {
-      console.log(day);
-      // TODO query firestore to see if we have any data for the clicked day
-      // If we have data, we show it in the details form, if we don't, we show a blank details form
+    onDayClick: function() {
+      console.log(this.selectedDate);
     },
   },
 };
