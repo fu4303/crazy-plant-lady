@@ -12,6 +12,7 @@ const initialState = () => {
     isUserAuthenticated: false,
     theme: "light",
     plantLogEntries: [],
+    plantDetails: [],
   };
 };
 export default new Vuex.Store({
@@ -142,6 +143,22 @@ export default new Vuex.Store({
 
       commit("deletePlantLogEntry", payload);
     },
+    async getPlantDetailsByDate({ commit }, payload) {
+      const plantDetails = await firebase
+        .firestore()
+        .collection("users")
+        .doc(firebase.auth().currentUser.uid)
+        .collection("plants")
+        .doc(payload.id)
+        .collection("plant-details")
+        .where("dateText", "==", payload.dateText);
+
+      plantDetails.get().then((querySnapShot) => {
+        querySnapShot.forEach((doc) => {
+          console.log(doc);
+        });
+      });
+    },
   },
   modules: {},
   getters: {
@@ -151,5 +168,6 @@ export default new Vuex.Store({
     isUserAuth: (state) => state.isUserAuthenticated,
     getError: (state) => state.error,
     plantLogEntries: (state) => state.plantLogEntries,
+    plantDetails: (state) => state.plantDetails,
   },
 });

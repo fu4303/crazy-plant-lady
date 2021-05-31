@@ -51,4 +51,16 @@ const getDateOfWeek = (unixTimeStamp) => {
   return dateFromTimeStamp.getDate();
 };
 
-export { getCurrentDate };
+/**
+ * returns YYYYMMDD in string format
+ * makes retrieving plant details from firestore wayyyyy easier
+ * @param {*} date
+ */
+const getDateTextFormat = (date) => {
+  const day = `${date.getDate()}`;
+  const month = `${date.getMonth() + 1}`;
+  const year = `${date.getFullYear()}`;
+  return year + month.padStart(2, 0) + day.padStart(2, 0);
+};
+
+export { getCurrentDate, getDateTextFormat };
