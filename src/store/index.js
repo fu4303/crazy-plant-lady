@@ -48,6 +48,9 @@ export default new Vuex.Store({
       );
       state.plantLogEntries = filteredPlants;
     },
+    addDetailsForDay(state, data) {
+      state.plantDetails = data;
+    },
   },
   actions: {
     signUpAction({ commit }, payload) {
@@ -144,21 +147,30 @@ export default new Vuex.Store({
       commit("deletePlantLogEntry", payload);
     },
     async getPlantDetailsByDate({ commit }, payload) {
-      const plantDetails = await firebase
-        .firestore()
-        .collection("users")
-        .doc(firebase.auth().currentUser.uid)
-        .collection("plants")
-        .doc(payload.id)
-        .collection("plant-details")
-        .where("dateText", "==", payload.dateText);
+      if (payload === null) {
+        commit("addDetailsForDay", null);
+      } else {
+        console.log(payload);
+        const plantDetails = await firebase
+          .firestore()
+          .collection("users")
+          .doc(firebase.auth().currentUser.uid)
+          .collection("plants")
+          .doc(payload.id)
+          .collection("plant-details")
+          .where("dateText", "==", payload.dateText);
 
-      plantDetails.get().then((querySnapShot) => {
-        querySnapShot.forEach((doc) => {
-          // console.log(doc);
-          commit("pleaseLinter", doc);
+        plantDetails.get().then((querySnapShot) => {
+          if (querySnapShot.empty) {
+            commit("addDetailsForDay", null);
+          } else {
+            querySnapShot.forEach((doc) => {
+              const details = doc.data();
+              commit("addDetailsForDay", details);
+            });
+          }
         });
-      });
+      }
     },
   },
   modules: {},
