@@ -12,7 +12,14 @@
             @dayclick="onDayClick"
           />
         </v-col>
-        <v-col cols="5"> details </v-col>
+        <v-col cols="5">
+          <template v-if="plantDetails">
+            <div>Did Feed: {{ plantDetails.didFeed }}</div>
+            <div>Did Prune: {{ plantDetails.didPrune }}</div>
+            <div>Did Water: {{ plantDetails.didWater }}</div>
+            <div>Misc Notes: {{ plantDetails.miscNotes }}</div>
+          </template>
+        </v-col>
       </v-row>
     </v-container>
   </div>
@@ -41,6 +48,13 @@ export default {
   methods: {
     onDayClick: function () {
       console.log(this.selectedDate);
+      this.$store.dispatch("getPlantDetailsByDate", {
+        id: this.plantData.id,
+        dateText:
+          this.selectedDate !== null
+            ? getDateTextFormat(this.selectedDate)
+            : null,
+      });
     },
   },
 };
