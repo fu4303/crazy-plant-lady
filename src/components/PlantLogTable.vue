@@ -171,7 +171,7 @@ export default {
     },
     goToDetails(item) {
       this.$router.push({
-        name: "plantdetails",
+        name: "plantdetailscalendar",
         params: { id: item.id, plantData: item },
       });
     },

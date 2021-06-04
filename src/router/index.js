@@ -5,7 +5,7 @@ import Home from "@/views/user/UserHome.vue";
 import Welcome from "../views/Welcome.vue";
 import PlantLog from "@/views/user/PlantLog.vue";
 import UserDashboard from "@/views/user/UserDashboard.vue";
-import PlantDetails from "@/views/user/PlantDetails.vue";
+import PlantDetailsDatePicker from "@/views/user/PlantDetailsDatePicker.vue";
 
 Vue.use(VueRouter);
 
@@ -40,9 +40,9 @@ const routes = [
         component: UserDashboard,
       },
       {
-        path: "plantdetails/:id",
-        name: "plantdetails",
-        component: PlantDetails,
+        path: "plantdetailscalendar/:id",
+        name: "plantdetailscalendar",
+        component: PlantDetailsDatePicker,
         props: true,
       },
     ],

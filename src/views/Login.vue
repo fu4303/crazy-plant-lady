@@ -63,7 +63,6 @@ export default {
         if (!this.getError) {
           this.$store.commit("setUserAuth", true);
           this.$router.push({ path: "/home/dashboard" });
-          // this.$router.replace({ name: "Home" });
         }
       }
     },
