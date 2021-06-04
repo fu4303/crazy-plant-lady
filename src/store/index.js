@@ -166,11 +166,27 @@ export default new Vuex.Store({
           } else {
             querySnapShot.forEach((doc) => {
               const details = doc.data();
+              details.id = doc.id;
               commit("addDetailsForDay", details);
             });
           }
         });
       }
+    },
+
+    async addPlantDetailsEntry({ commit }, payload) {
+      await firebase
+        .firestore()
+        .collection("users")
+        .doc(firebase.auth().currentUser.uid)
+        .collection("plants")
+        .doc(payload.plantDetailsId) // plants id
+        .collection("plant-details")
+        .add({
+          ...payload.form,
+          createdAt: new Date(),
+        });
+      commit("addDetailsForDay", payload);
     },
   },
   modules: {},
