@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import store from "../store";
+import store from "../store/store";
 import Home from "@/views/user/UserHome.vue";
 import Welcome from "../views/Welcome.vue";
 import PlantLog from "@/views/user/PlantLog.vue";
@@ -20,7 +20,7 @@ const routes = [
     path: "/home",
     component: Home,
     beforeEnter: (to, from, next) => {
-      if (!store.state.isUserAuthenticated) {
+      if (!store.state.auth.isUserAuthenticated) {
         next("/signin");
       } else {
         next();
