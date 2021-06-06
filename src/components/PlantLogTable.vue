@@ -166,7 +166,6 @@ export default {
     selectDateAcquired(item) {
       if (this.isEditRowMode(item)) {
         this.showDatePicker = true;
-        console.log("is in edit mode");
       }
     },
     goToDetails(item) {
