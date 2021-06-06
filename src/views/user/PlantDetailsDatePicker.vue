@@ -114,18 +114,11 @@ export default {
       });
     },
     submitPlantDetails: function () {
-      if (this.detailsForm.id) {
-        console.log(this.detailsForm.id);
-      } else {
-        // new plant entry
-        this.addPlantDetailsEntry({
-          form: {
-            ...this.detailsForm,
-            dateText: getDateTextFormat(this.selectedDate),
-          },
-          plantDetailsId: this.plantData.id,
-        });
-      }
+      this.addPlantDetailsEntry({
+        ...this.detailsForm,
+        dateText: getDateTextFormat(this.selectedDate),
+        id: this.plantData.id,
+      });
     },
   },
 };

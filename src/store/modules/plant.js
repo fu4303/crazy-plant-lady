@@ -92,7 +92,6 @@ export default {
       if (payload === null) {
         commit("addDetailsForDay", null);
       } else {
-        console.log(payload);
         const plantDetails = await firebase
           .firestore()
           .collection("users")
@@ -122,10 +121,10 @@ export default {
         .collection("users")
         .doc(firebase.auth().currentUser.uid)
         .collection("plants")
-        .doc(payload.plantDetailsId) // plants id
+        .doc(payload.id) // plants id
         .collection("plant-details")
         .add({
-          ...payload.form,
+          ...payload,
           createdAt: new Date(),
         });
       commit("addDetailsForDay", payload);

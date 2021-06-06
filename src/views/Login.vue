@@ -60,7 +60,6 @@ export default {
       const isFormValid = this.$refs.form.validate();
       if (isFormValid) {
         await this.signInAction({ email: this.email, password: this.password });
-        console.log(this);
         if (!this.getError) {
           this.$store.commit("setUserAuth", true);
           this.$router.push({ path: "/home/dashboard" });
