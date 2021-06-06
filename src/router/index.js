@@ -32,18 +32,24 @@ const routes = [
         redirect: "dashboard",
       },
       {
-        path: "plantlog",
-        component: PlantLog,
-      },
-      {
         path: "dashboard",
         component: UserDashboard,
       },
       {
-        path: "plantdetailscalendar/:id",
-        name: "plantdetailscalendar",
-        component: PlantDetailsDatePicker,
-        props: true,
+        path: "plantlog",
+        component: Home,
+        children: [
+          {
+            path: "",
+            component: PlantLog,
+          },
+          {
+            path: "plantdetails/:id",
+            name: "plantdetailscalendar",
+            component: PlantDetailsDatePicker,
+            props: true,
+          },
+        ],
       },
     ],
   },
