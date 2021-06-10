@@ -59,6 +59,7 @@ const routes = [
   },
   {
     path: "/register",
+    name: "register",
     component: lazy("Register"),
   },
 ];
