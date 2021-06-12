@@ -1,7 +1,7 @@
 export default {
   state: {
     drawerState: false,
-    theme: "light",
+    theme: "dark",
   },
 
   mutations: {
