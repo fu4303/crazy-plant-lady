@@ -6,6 +6,7 @@ Vue.use(Vuetify);
 
 export default new Vuetify({
   theme: {
+    dark: true,
     themes: {
       light: {
         primaryOne: colors.green.lighten4,
@@ -14,6 +15,7 @@ export default new Vuetify({
         secondaryTwo: colors.purple.lighten4,
         accent: colors.blueGrey.darken1,
         error: colors.red.accent3,
+        background: colors.green.accent2,
       },
       dark: {
         primaryOne: colors.teal.darken4,
@@ -22,6 +24,7 @@ export default new Vuetify({
         secondaryTwo: colors.indigo.darken3,
         accent: colors.blue.darken1,
         error: colors.red.darken1,
+        background: colors.grey.darken4,
       },
     },
   },
