@@ -48,7 +48,7 @@
             data-aos="fade-right"
             data-aos-duration="400"
             data-aos-easing="ease-in-out"
-            data-aos-offset="100"
+            data-aos-offset="40"
           >
             <v-img
               src="@/assets/plant-lady-2.png"
@@ -62,7 +62,7 @@
             data-aos="fade-left"
             data-aos-duration="500"
             data-aos-easing="ease-in-out"
-            data-aos-offset="100"
+            data-aos-offset="40"
           >
             <h2 class="text-h4 d-flex justify-start fontOne--text">Calendar</h2>
             <p class="body-1 mt-2">
@@ -83,7 +83,7 @@
           <div
             data-aos="fade-right"
             data-aos-duration="600"
-            data-aos-offset="140"
+            data-aos-offset="50"
             data-aos-delay="50"
             data-aos-easing="ease-in-out"
           >
@@ -101,7 +101,7 @@
           <div
             data-aos="fade-left"
             data-aos-duration="400"
-            data-aos-offset="140"
+            data-aos-offset="50"
             data-aos-delay="50"
             data-aos-easing="ease-in-out"
           >
@@ -119,7 +119,7 @@
           <div
             data-aos="fade-right"
             data-aos-duration="750"
-            data-aos-offset="200"
+            data-aos-offset="50"
             data-aos-delay="50"
             data-aos-easing="ease-in-out"
           >
@@ -138,7 +138,7 @@
           <div
             data-aos="fade-left"
             data-aos-duration="950"
-            data-aos-offset="200"
+            data-aos-offset="50"
             data-aos-delay="50"
             data-aos-easing="ease-in-out"
           >
