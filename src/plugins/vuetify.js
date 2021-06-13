@@ -16,6 +16,7 @@ export default new Vuetify({
         accent: colors.blueGrey.darken1,
         error: colors.red.accent3,
         background: colors.green.accent2,
+        fontOne: colors.blue.darken4,
       },
       dark: {
         primaryOne: colors.teal.darken4,
@@ -25,6 +26,7 @@ export default new Vuetify({
         accent: colors.blue.darken1,
         error: colors.red.darken1,
         background: colors.grey.darken4,
+        fontOne: colors.lightBlue.lighten2,
       },
     },
   },
