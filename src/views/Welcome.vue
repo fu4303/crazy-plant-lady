@@ -14,7 +14,7 @@
       <div class="pt-11"></div>
       <v-row>
         <v-col class="d-flex justify-center align-center">
-          <div data-aos="fade-in" data-aos-duration="1500">
+          <div>
             <p
               class="text mt-2"
               :style="{
@@ -44,12 +44,7 @@
       </v-row>
       <v-row>
         <v-col>
-          <div
-            data-aos="fade-right"
-            data-aos-duration="400"
-            data-aos-easing="ease-in-out"
-            data-aos-offset="40"
-          >
+          <div v-animate-onscroll="'animated slideInLeft'">
             <v-img
               src="@/assets/plant-lady-2.png"
               max-height="600"
@@ -58,12 +53,7 @@
           </div>
         </v-col>
         <v-col order="2" class="d-flex justify-center align-center">
-          <div
-            data-aos="fade-left"
-            data-aos-duration="500"
-            data-aos-easing="ease-in-out"
-            data-aos-offset="40"
-          >
+          <div v-animate-onscroll="'animated slideInRight'">
             <h2 class="text-h4 d-flex justify-start fontOne--text">Calendar</h2>
             <p class="body-1 mt-2">
               Easily track your all of your plants with our calendar based
@@ -80,13 +70,7 @@
           order-sm="1"
           class="d-flex justify-center align-center"
         >
-          <div
-            data-aos="fade-right"
-            data-aos-duration="600"
-            data-aos-offset="50"
-            data-aos-delay="50"
-            data-aos-easing="ease-in-out"
-          >
+          <div v-animate-onscroll="'animated slideInLeft'">
             <h2 class="text-h4 d-flex justify-start fontOne--text">
               Dashboard
             </h2>
@@ -98,13 +82,7 @@
           </div>
         </v-col>
         <v-col order="1" order-sm="2">
-          <div
-            data-aos="fade-left"
-            data-aos-duration="400"
-            data-aos-offset="50"
-            data-aos-delay="50"
-            data-aos-easing="ease-in-out"
-          >
+          <div v-animate-onscroll="'animated slideInRight'">
             <v-img
               src="@/assets/plant-lady-1.png"
               max-height="600"
@@ -115,14 +93,8 @@
       </v-row>
       <div class="pt-16"></div>
       <v-row>
-        <v-col order-sm="2" order-md="1">
-          <div
-            data-aos="fade-right"
-            data-aos-duration="750"
-            data-aos-offset="50"
-            data-aos-delay="50"
-            data-aos-easing="ease-in-out"
-          >
+        <v-col order-sm="2" order-md="1" xs="12" lg="6">
+          <div v-animate-onscroll="'animated slideInLeft'">
             <v-img
               src="@/assets/sleeping-cactus.png"
               max-height="600"
@@ -131,17 +103,13 @@
           </div>
         </v-col>
         <v-col
+          xs="12"
+          lg="6"
           order-sm="1"
           order-md="2"
           class="d-flex justify-center align-center"
         >
-          <div
-            data-aos="fade-left"
-            data-aos-duration="950"
-            data-aos-offset="50"
-            data-aos-delay="50"
-            data-aos-easing="ease-in-out"
-          >
+          <div v-animate-onscroll="'animated slideInRight'">
             <p class="mt-2">
               <strong class="text-h3 red--text text--lighten-1">"</strong>
               <span class="quote-text">
