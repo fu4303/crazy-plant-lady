@@ -2,15 +2,20 @@
   <v-navigation-drawer
     app
     height="100vh"
-    color="lighten-4 primaryOne"
+    color="darken-1 primaryTwo"
     temporary
     v-model="drawerState"
     @mouseleave.native="toggleSidenav"
   >
     <v-list v-if="!isUserAuth">
-      <v-list-item @click="redirectToLogin()">
+      <v-list-item @click="redirectToLogin()" :disabled="isSignInActive">
         <v-list-item-content>
           <v-list-item-title> Sign In </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item @click="redirectToRegister()">
+        <v-list-item-content>
+          <v-list-item-title>Create Account</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -76,11 +81,17 @@ export default {
         return this.$store.commit("toggleDrawerState", toggle);
       },
     },
+    isSignInRouteActive() {
+      return this.$route.name === "signin";
+    },
   },
   methods: {
     ...mapActions(["signOutAction"]),
     redirectToLogin() {
       this.$router.push({ path: "/signin" });
+    },
+    redirectToRegister() {
+      this.$router.push({ path: "/register" });
     },
     toggleSidenav() {
       setTimeout(() => {
