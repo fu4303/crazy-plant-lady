@@ -44,7 +44,7 @@
       </v-row>
       <v-row>
         <v-col>
-          <div v-animate-onscroll="'animated slideInLeft'">
+          <div v-animate-onscroll="'animated fadeInLeft'">
             <v-img
               src="@/assets/plant-lady-2.png"
               max-height="600"
@@ -53,7 +53,7 @@
           </div>
         </v-col>
         <v-col order="2" class="d-flex justify-center align-center">
-          <div v-animate-onscroll="'animated slideInRight'">
+          <div v-animate-onscroll="'animated fadeInRight'">
             <h2 class="text-h4 d-flex justify-start fontOne--text">Calendar</h2>
             <p class="body-1 mt-2">
               Easily track your all of your plants with our calendar based
@@ -70,7 +70,7 @@
           order-sm="1"
           class="d-flex justify-center align-center"
         >
-          <div v-animate-onscroll="'animated slideInLeft'">
+          <div v-animate-onscroll="'animated fadeInLeft'">
             <h2 class="text-h4 d-flex justify-start fontOne--text">
               Dashboard
             </h2>
@@ -82,7 +82,7 @@
           </div>
         </v-col>
         <v-col order="1" order-sm="2">
-          <div v-animate-onscroll="'animated slideInRight'">
+          <div v-animate-onscroll="'animated fadeInRight'">
             <v-img
               src="@/assets/plant-lady-1.png"
               max-height="600"
@@ -91,14 +91,14 @@
           </div>
         </v-col>
       </v-row>
-      <div class="pt-16"></div>
+      <div class="mt-16"></div>
       <v-row>
         <v-col order-sm="2" order-md="1" xs="12" lg="6">
-          <div v-animate-onscroll="'animated slideInLeft'">
+          <div v-animate-onscroll="'animated fadeInLeft'">
             <v-img
               src="@/assets/sleeping-cactus.png"
-              max-height="600"
-              max-width="300"
+              max-height="480"
+              max-width="260"
             ></v-img>
           </div>
         </v-col>
@@ -107,9 +107,9 @@
           lg="6"
           order-sm="1"
           order-md="2"
-          class="d-flex justify-center align-center"
+          class="d-flex justify-center align-center pt-6"
         >
-          <div v-animate-onscroll="'animated slideInRight'">
+          <div v-animate-onscroll="'animated fadeInRight'">
             <p class="mt-2">
               <strong class="text-h3 red--text text--lighten-1">"</strong>
               <span class="quote-text">
@@ -117,9 +117,10 @@
                 others, is to know the enduring happiness that the love of a
                 garden gives. </span
               ><span class="text-h3 red--text text--lighten-1">"</span>
-              <br />
-              Gertrude Jekyll
             </p>
+            <h6 class="text-h6 d-flex justify-start fontOne--text">
+              Gertrude Jekyll
+            </h6>
           </div>
         </v-col>
       </v-row>
