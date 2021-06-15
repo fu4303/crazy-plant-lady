@@ -12,11 +12,18 @@
               >
               <v-col>
                 <v-img
+                  v-if="!$vuetify.theme.dark"
                   src="@/assets/cpp-house.png"
                   max-height="110"
                   max-width="227"
-                ></v-img
-              ></v-col>
+                ></v-img>
+                <v-img
+                  v-else
+                  src="@/assets/cpp-house-dark-theme.png"
+                  max-height="110"
+                  max-width="227"
+                ></v-img>
+              </v-col>
             </v-row>
           </v-container>
           <slot></slot>

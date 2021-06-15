@@ -17,13 +17,23 @@
         @click:append="showPassword = !showPassword"
         required
       ></v-text-field>
-      <v-btn class="mt-2" @click="validate()" color="accent">Sign In</v-btn>
+      <v-hover>
+        <v-btn
+          block
+          elevation="4"
+          class="mt-2"
+          @click="validate()"
+          color="accent"
+          >Sign In</v-btn
+        >
+      </v-hover>
     </v-form>
     <hr class="mt-5" />
     <v-card-actions class="mt-2">
-      New to CrazyPlantPerson?
+      <v-spacer></v-spacer>
+      <p class="body-2 pt-4 mr-6">Need an account?</p>
       <v-btn class="ml-1" @click="redirectToRegister()" color="accent">
-        Create an account
+        Register
       </v-btn>
     </v-card-actions>
   </CardWrapper>
