@@ -170,7 +170,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@1,500&display=swap");
 .headline {
   text-shadow: -2px 5px 6px darken(#d4d4d4, 15);
