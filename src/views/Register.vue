@@ -28,9 +28,11 @@
         required
         @keyup="validateForm"
       ></v-text-field>
-      <v-btn @click="signup()" :disabled="!validated" color="accent"
-        >Create Account</v-btn
-      >
+      <v-card-actions class="mt-2 justify-end">
+        <v-btn @click="signup()" :disabled="!validated" color="accent"
+          >Create Account</v-btn
+        >
+      </v-card-actions>
     </v-form>
   </CardWrapper>
 </template>
