@@ -59,8 +59,7 @@
                         appearance-none
                         border
                         rounded-r
-                        focus:outline-none
-                        focus:border-blue-500
+                        focus:outline-none focus:border-blue-500
                       "
                       readonly
                     />
