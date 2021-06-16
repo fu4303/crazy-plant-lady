@@ -29,7 +29,7 @@
       </v-hover>
     </v-form>
     <hr class="mt-5" />
-    <v-card-actions class="mt-2">
+    <v-card-actions class="mt-2 justify-end">
       <p class="body-2 pt-1 mr-6">Need an account?</p>
       <v-btn class="ml-1" @click="redirectToRegister()" color="accent">
         Register
