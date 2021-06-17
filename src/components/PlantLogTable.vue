@@ -12,7 +12,7 @@
     <tbody>
       <tr v-for="item in plantLogEntries" :key="item.id">
         <template>
-          <td>
+          <td class="text-xs-right v-td">
             <v-text-field
               v-model="item.plantName"
               :rules="rules"
@@ -23,7 +23,7 @@
               :disabled="!isEditRowMode(item)"
             ></v-text-field>
           </td>
-          <td>
+          <td class="text-xs-right v-td">
             <v-text-field
               v-model="item.plantType"
               :rules="rules"
@@ -34,7 +34,7 @@
               :disabled="!isEditRowMode(item)"
             ></v-text-field>
           </td>
-          <td>
+          <td class="text-xs-right v-calendar-td">
             <template>
               <vc-date-picker
                 class="inline-block h-full"
@@ -70,7 +70,7 @@
           </td>
         </template>
 
-        <td>
+        <td class="text-xs-right v-td">
           <v-btn v-if="!isEditRowMode(item)" icon @click="editItem(item)">
             <v-icon>mdi-pencil</v-icon>
           </v-btn>
@@ -81,7 +81,7 @@
             <v-icon>mdi-delete</v-icon>
           </v-btn>
         </td>
-        <td>
+        <td class="text-xs-right">
           <v-btn icon @click="goToDetails(item)">
             <v-icon>mdi-notebook</v-icon>
           </v-btn>
@@ -183,5 +183,11 @@ th,
 td {
   border: 0.5px solid lighten($dark-gray, 20);
   border-collapse: collapse;
+  .v-td {
+    min-width: 9rem;
+  }
+  .v-calendar-td {
+    min-width: 8rem;
+  }
 }
 </style>
