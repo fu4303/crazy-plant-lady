@@ -31,7 +31,7 @@
       </v-row>
       <v-row>
         <v-col>
-          <PlantLogTable></PlantLogTable>
+          <PlantLogCards></PlantLogCards>
         </v-col>
       </v-row>
     </v-container>
@@ -40,9 +40,9 @@
 
 <script>
 import { mapGetters } from "vuex";
-import PlantLogTable from "@/components/PlantLogTable.vue";
+import PlantLogCards from "@/components/PlantLogCards.vue";
 export default {
-  components: { PlantLogTable },
+  components: { PlantLogCards },
   name: "PlantLog",
   data() {
     return {
