@@ -9,6 +9,7 @@
       >
         <!-- start display card -->
         <template v-if="!isEditMode(item)">
+          <v-img height="250" src="@/assets/plant-cartoon-img.png"></v-img>
           <v-card-actions class="center card-actions">
             <v-btn icon @click="editItem(item)">
               <v-icon>mdi-pencil</v-icon>
@@ -36,6 +37,7 @@
         <!-- end display card -->
         <!-- start editable card -->
         <template v-if="isEditMode(item)">
+          <v-img height="250" src="@/assets/plant-cartoon-img.png"></v-img>
           <v-card-actions class="center card-actions">
             <v-btn icon @click="saveItem(item)">
               <v-icon>mdi-content-save</v-icon>
