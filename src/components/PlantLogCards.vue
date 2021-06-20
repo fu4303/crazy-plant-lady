@@ -1,7 +1,12 @@
 <template>
   <div class="cards-container">
     <template v-for="item in plantLogEntries">
-      <v-card max-width="385" :key="item.id" class="ma-2">
+      <v-card
+        max-width="385"
+        :key="item.id"
+        class="ma-2"
+        :class="{ flipIn: isEditMode(item), flipOut: !isEditMode(item) }"
+      >
         <!-- start display card -->
         <template v-if="!isEditMode(item)">
           <v-card-actions class="center card-actions">
@@ -198,5 +203,22 @@ export default {
 }
 .center {
   justify-content: center;
+}
+
+.flipIn {
+  animation: flipInY 1s;
+}
+
+.flipOut {
+  animation: flipInX 1s;
+}
+
+@keyframes flipIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 </style>
