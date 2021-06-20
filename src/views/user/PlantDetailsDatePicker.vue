@@ -7,9 +7,17 @@
       <v-row>
         <v-col cols="7">
           <vc-date-picker
+            v-if="!$vuetify.theme.dark"
             v-model="selectedDate"
             is-expanded
             @dayclick="onDayClick"
+          />
+          <vc-date-picker
+            v-if="$vuetify.theme.dark"
+            v-model="selectedDate"
+            is-expanded
+            @dayclick="onDayClick"
+            is-dark
           />
         </v-col>
         <v-col cols="5">
