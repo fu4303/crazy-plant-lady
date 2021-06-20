@@ -8,7 +8,7 @@
     @mouseleave.native="toggleSidenav"
   >
     <v-list v-if="!isUserAuth">
-      <v-list-item @click="redirectToLogin()" :disabled="isSignInActive">
+      <v-list-item @click="redirectToLogin()" :disabled="isSignInRouteActive">
         <v-list-item-content>
           <v-list-item-title> Sign In </v-list-item-title>
         </v-list-item-content>
@@ -81,7 +81,7 @@ export default {
         return this.$store.commit("toggleDrawerState", toggle);
       },
     },
-    isSignInRouteActive() {
+    isSignInRouteActive: function () {
       return this.$route.name === "signin";
     },
   },
