@@ -15,9 +15,8 @@ const months = [
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-const getCurrentDate = () => {
-  const timeElapsed = Date.now();
-  const now = new Date(timeElapsed);
+const getCurrentDate = (current = Date.now()) => {
+  const now = new Date(current);
 
   const monthIndex = now.getMonth();
   const year = now.getFullYear();
@@ -39,4 +38,12 @@ const getDateTextFormat = (date) => {
   return year + month.padStart(2, 0) + day.padStart(2, 0);
 };
 
-export { getCurrentDate, getDateTextFormat };
+/**
+ * convert firebase date to a more readable date :)
+ */
+const formatFirebaseDate = (date) => {
+  const dateToUnixStamp = Date.parse(date);
+  return getCurrentDate(dateToUnixStamp);
+};
+
+export { getCurrentDate, getDateTextFormat, formatFirebaseDate };

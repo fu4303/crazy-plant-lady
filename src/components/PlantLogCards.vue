@@ -2,56 +2,68 @@
   <div class="cards-container">
     <template v-for="item in plantLogEntries">
       <v-card
-        class="ma-12"
         max-width="385"
         :key="item.id"
-        v-if="!isEditMode(item)"
+        class="ma-2"
+        :class="{ flipIn: isEditMode(item), flipOut: !isEditMode(item) }"
       >
-        <v-card-actions class="center card-actions">
-          <v-btn icon @click="editItem(item)">
-            <v-icon>mdi-pencil</v-icon>
-          </v-btn>
-          <v-btn icon @click="goToDetails(item)">
-            <v-icon>mdi-notebook</v-icon>
-          </v-btn>
-        </v-card-actions>
-        <v-card-title class="center card-title my-6" v-if="!isEditMode(item)">
-          {{ item.plantName }}
-        </v-card-title>
-        <v-card-title v-if="isEditMode(item)">
-          <v-text-field
-            v-model="item.plantName"
-            :rules="rules"
-            hide-details="auto"
-            dense
-            label="Plant Name"
-            clearable
-            :filled="isEditMode(item)"
-            :readonly="!isEditMode(item)"
-            :disabled="!isEditMode(item)"
-          ></v-text-field>
-        </v-card-title>
-        <v-card-text>
-          <v-row justify="center" class="my-6">
-            <div class="my-4 text-subtitle-1" v-if="!isEditMode(item)">
-              {{ item.plantType }}
-            </div>
-            <div class="text-subtitle-1" v-if="isEditMode(item)">
-              <v-text-field
-                v-model="item.plantType"
-                :rules="rules"
-                hide-details="auto"
-                dense
-                label="Plant Type"
-                clearable
-                :filled="isEditMode(item)"
-                :readonly="!isEditMode(item)"
-                :disabled="!isEditMode(item)"
-              ></v-text-field>
-            </div>
-          </v-row>
-          <v-row justify="center" class="my-6">
-            <div class="my-4">
+        <!-- start display card -->
+        <template v-if="!isEditMode(item)">
+          <v-card-actions class="center card-actions">
+            <v-btn icon @click="editItem(item)">
+              <v-icon>mdi-pencil</v-icon>
+            </v-btn>
+            <v-btn icon @click="goToDetails(item)">
+              <v-icon>mdi-notebook</v-icon>
+            </v-btn>
+          </v-card-actions>
+          <v-card-title class="center card-title py-4">
+            {{ item.plantName }}
+          </v-card-title>
+          <v-card-text>
+            <v-row justify="center" class="py-4">
+              <div class="text-subtitle-1">
+                {{ item.plantType }}
+              </div>
+            </v-row>
+            <v-row justify="center" class="py-5">
+              <div class="text-subtitle-1">
+                {{ item.dateAcquired | formatDate }}
+              </div>
+            </v-row>
+          </v-card-text>
+        </template>
+        <!-- end display card -->
+        <!-- start editable card -->
+        <template v-if="isEditMode(item)">
+          <v-card-actions class="center card-actions">
+            <v-btn icon @click="saveItem(item)">
+              <v-icon>mdi-content-save</v-icon>
+            </v-btn>
+            <v-btn icon @click="deleteItem(item)">
+              <v-icon>mdi-delete</v-icon>
+            </v-btn>
+          </v-card-actions>
+          <v-card-title>
+            <v-text-field
+              v-model="item.plantName"
+              :rules="rules"
+              hide-details="auto"
+              label="Plant Name"
+              clearable
+              dense
+            ></v-text-field>
+          </v-card-title>
+          <v-card-text>
+            <v-text-field
+              v-model="item.plantType"
+              :rules="rules"
+              hide-details="auto"
+              label="Plant Type"
+              clearable
+              dense
+            ></v-text-field>
+            <div>
               <template>
                 <vc-date-picker
                   class="inline-block h-full"
@@ -71,8 +83,6 @@
                           bg-white
                           text-gray-700
                           w-full
-                          py-1
-                          px-2
                           appearance-none
                           border
                           rounded-r
@@ -85,96 +95,9 @@
                 </vc-date-picker>
               </template>
             </div>
-          </v-row>
-        </v-card-text>
-      </v-card>
-
-      <v-card
-        class="ma-12"
-        max-width="385"
-        :key="item.id"
-        v-if="isEditMode(item)"
-      >
-        <v-card-actions class="center card-actions">
-          <v-btn icon @click="saveItem(item)">
-            <v-icon>mdi-content-save</v-icon>
-          </v-btn>
-          <v-btn icon @click="deleteItem(item)">
-            <v-icon>mdi-delete</v-icon>
-          </v-btn>
-          <v-btn icon @click="goToDetails(item)">
-            <v-icon>mdi-notebook</v-icon>
-          </v-btn>
-        </v-card-actions>
-        <v-card-title class="center card-title my-6" v-if="!isEditMode(item)">
-          {{ item.plantName }} testing
-        </v-card-title>
-        <v-card-title>
-          <v-text-field
-            v-model="item.plantName"
-            :rules="rules"
-            hide-details="auto"
-            dense
-            label="Plant Name"
-            clearable
-            :filled="isEditMode(item)"
-            :readonly="!isEditMode(item)"
-            :disabled="!isEditMode(item)"
-          ></v-text-field>
-        </v-card-title>
-        <v-card-text>
-          <v-row justify="center" class="my-6">
-            <div class="text-subtitle-1">
-              <v-text-field
-                v-model="item.plantType"
-                :rules="rules"
-                hide-details="auto"
-                dense
-                label="Plant Type"
-                clearable
-                :filled="isEditMode(item)"
-                :readonly="!isEditMode(item)"
-                :disabled="!isEditMode(item)"
-              ></v-text-field>
-            </div>
-          </v-row>
-          <v-row justify="center" class="my-6">
-            <div class="my-4">
-              <template>
-                <vc-date-picker
-                  class="inline-block h-full"
-                  v-model="item.dateAcquired"
-                >
-                  <template v-slot="{ inputValue, togglePopover }">
-                    <div class="flex items-center">
-                      <v-btn
-                        icon
-                        @click="togglePopover()"
-                        :disabled="!isEditMode(item)"
-                        ><v-icon>mdi-calendar-month</v-icon></v-btn
-                      >
-                      <input
-                        :value="inputValue"
-                        class="
-                          bg-white
-                          text-gray-700
-                          w-full
-                          py-1
-                          px-2
-                          appearance-none
-                          border
-                          rounded-r
-                          focus:outline-none focus:border-blue-500
-                        "
-                        readonly
-                      />
-                    </div>
-                  </template>
-                </vc-date-picker>
-              </template>
-            </div>
-          </v-row>
-        </v-card-text>
+          </v-card-text>
+        </template>
+        <!-- end editable card -->
       </v-card>
     </template>
   </div>
@@ -182,6 +105,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { formatFirebaseDate } from "@/utils/DateUtil.js";
 export default {
   name: "PlantLogCards",
   data() {
@@ -235,7 +159,6 @@ export default {
       this.editMode.isEditMode = true;
     },
     saveItem(item) {
-      console.log(item);
       this.editMode.isEditMode = false;
       this.$store.dispatch("updatePlantEntry", item);
     },
@@ -264,6 +187,12 @@ export default {
       });
     },
   },
+  filters: {
+    formatDate: function (date) {
+      if (!date) return "";
+      return formatFirebaseDate(date);
+    },
+  },
 };
 </script>
 
@@ -274,5 +203,22 @@ export default {
 }
 .center {
   justify-content: center;
+}
+
+.flipIn {
+  animation: flipInY 1s;
+}
+
+.flipOut {
+  animation: flipInX 1s;
+}
+
+@keyframes flipIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 </style>
