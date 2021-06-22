@@ -70,6 +70,7 @@
                 <vc-date-picker
                   class="inline-block h-full"
                   v-model="item.dateAcquired"
+                  :is-dark="$vuetify.theme.dark"
                 >
                   <template v-slot="{ inputValue, togglePopover }">
                     <div class="flex items-center">
