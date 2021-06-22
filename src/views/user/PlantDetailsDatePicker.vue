@@ -1,79 +1,79 @@
 <template>
-  <div>
-    <div class="plant-deets-heading">
-      <h1>{{ plantData.plantName }} Details</h1>
-    </div>
-    <v-container>
-      <v-row>
-        <v-col cols="7">
-          <vc-date-picker
-            v-if="!$vuetify.theme.dark"
-            v-model="selectedDate"
-            is-expanded
-            @dayclick="onDayClick"
-          />
-          <vc-date-picker
-            v-if="$vuetify.theme.dark"
-            v-model="selectedDate"
-            is-expanded
-            @dayclick="onDayClick"
-            is-dark
-          />
-        </v-col>
-        <v-col cols="5">
-          <template v-if="formReady">
-            <v-form ref="form">
-              <v-container>
-                <v-row>
-                  <v-col cols="4" md="4">
-                    <v-checkbox
-                      v-model="detailsForm.didPrune"
-                      :label="`Did You Prune Today?`"
-                    ></v-checkbox>
-                  </v-col>
-                  <v-col cols="4" md="4">
-                    <v-checkbox
-                      v-model="detailsForm.didFeed"
-                      :label="`Did You Feed Today?`"
-                    ></v-checkbox>
-                  </v-col>
-                  <v-col cols="4" md="4">
-                    <v-checkbox
-                      v-model="detailsForm.didWater"
-                      :label="`Did You Water Today?`"
-                    ></v-checkbox>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col>
-                    <v-textarea
-                      name="miscnotes"
-                      v-model="detailsForm.miscNotes"
-                      filled
-                      no-resize
-                      rows="3"
-                      label="Misc. Notes"
-                    ></v-textarea>
-                  </v-col>
-                </v-row>
-              </v-container>
-              <v-btn
-                class="mt-2"
-                @click="submitPlantDetails()"
-                color="accent"
-                >{{ submitButtonText }}</v-btn
-              >
-            </v-form>
-          </template>
-        </v-col>
-      </v-row>
-    </v-container>
-  </div>
+  <v-container>
+    <v-row>
+      <v-col class="d-flex justify-center">
+        <h1 class="fontOne--text header" :class="headerDisplay">
+          {{ plantData.plantName }} Details
+        </h1>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="7">
+        <vc-date-picker
+          v-if="!$vuetify.theme.dark"
+          v-model="selectedDate"
+          is-expanded
+          @dayclick="onDayClick"
+        />
+        <vc-date-picker
+          v-if="$vuetify.theme.dark"
+          v-model="selectedDate"
+          is-expanded
+          @dayclick="onDayClick"
+          is-dark
+        />
+      </v-col>
+      <v-col cols="5">
+        <template v-if="formReady">
+          <v-form ref="form">
+            <v-container>
+              <v-row>
+                <v-col cols="4" md="4">
+                  <v-checkbox
+                    v-model="detailsForm.didPrune"
+                    :label="`Did You Prune Today?`"
+                  ></v-checkbox>
+                </v-col>
+                <v-col cols="4" md="4">
+                  <v-checkbox
+                    v-model="detailsForm.didFeed"
+                    :label="`Did You Feed Today?`"
+                  ></v-checkbox>
+                </v-col>
+                <v-col cols="4" md="4">
+                  <v-checkbox
+                    v-model="detailsForm.didWater"
+                    :label="`Did You Water Today?`"
+                  ></v-checkbox>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-textarea
+                    name="miscnotes"
+                    v-model="detailsForm.miscNotes"
+                    filled
+                    no-resize
+                    rows="3"
+                    label="Misc. Notes"
+                  ></v-textarea>
+                </v-col>
+              </v-row>
+            </v-container>
+            <v-btn class="mt-2" @click="submitPlantDetails()" color="accent">{{
+              submitButtonText
+            }}</v-btn>
+          </v-form>
+        </template>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { getDateTextFormat } from "@/utils/DateUtil.js";
+import { getHeaderDisplay } from "@/utils/formatter";
 export default {
   name: "PlantDetailsDatePicker",
   props: ["plantData"],
@@ -87,6 +87,9 @@ export default {
   },
   computed: {
     ...mapGetters(["plantDetails"]),
+    headerDisplay() {
+      return getHeaderDisplay(this.$vuetify.breakpoint.name);
+    },
   },
   mounted() {
     this.$store.dispatch("getPlantDetailsByDate", {
@@ -133,10 +136,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.plant-deets-heading {
-  padding: 3rem;
-  h1 {
-    text-align: center;
-  }
+.header {
+  cursor: pointer;
 }
 </style>
