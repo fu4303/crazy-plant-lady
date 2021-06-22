@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col class="d-flex justify-center">
-        <h1 class="display-4">Your Dashboard</h1>
+        <PageHeader>Your Dashboard</PageHeader>
       </v-col>
     </v-row>
     <v-row>
@@ -19,8 +19,10 @@
 <script>
 import { mapGetters } from "vuex";
 import { getCurrentDate } from "@/utils/DateUtil";
+import PageHeader from "@/components/PageHeader.vue";
 export default {
   name: "UserDashboard",
+  components: { PageHeader },
   data() {
     return {
       lastSignIn: null,
