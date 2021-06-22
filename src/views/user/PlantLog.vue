@@ -3,9 +3,7 @@
     <v-container>
       <v-row>
         <v-col class="d-flex justify-center">
-          <h1 class="fontOne--text header" :class="headerDisplay">
-            Your Plant Log
-          </h1>
+          <PageHeader>Your Plant Log</PageHeader>
         </v-col>
       </v-row>
       <v-row justify="end">
@@ -41,9 +39,9 @@
 <script>
 import { mapGetters } from "vuex";
 import PlantLogCards from "@/components/PlantLogCards.vue";
-import { getHeaderDisplay } from "@/utils/formatter";
+import PageHeader from "@/components/PageHeader.vue";
 export default {
-  components: { PlantLogCards },
+  components: { PlantLogCards, PageHeader },
   name: "PlantLog",
   data() {
     return {
@@ -54,9 +52,6 @@ export default {
   },
   computed: {
     ...mapGetters(["plantLogEntries"]),
-    headerDisplay() {
-      return getHeaderDisplay(this.$vuetify.breakpoint.name);
-    },
   },
   methods: {
     addPlantToLog() {

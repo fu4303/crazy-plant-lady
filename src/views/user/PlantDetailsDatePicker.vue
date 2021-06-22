@@ -2,9 +2,7 @@
   <v-container>
     <v-row>
       <v-col class="d-flex justify-center">
-        <h1 class="fontOne--text header" :class="headerDisplay">
-          {{ plantData.plantName }} Details
-        </h1>
+        <PageHeader>{{ plantData.plantName }} Details</PageHeader>
       </v-col>
     </v-row>
     <v-row>
@@ -73,10 +71,13 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { getDateTextFormat } from "@/utils/DateUtil.js";
-import { getHeaderDisplay } from "@/utils/formatter";
+import PageHeader from "@/components/PageHeader.vue";
 export default {
   name: "PlantDetailsDatePicker",
   props: ["plantData"],
+  components: {
+    PageHeader,
+  },
   data() {
     return {
       selectedDate: new Date(),
@@ -87,9 +88,6 @@ export default {
   },
   computed: {
     ...mapGetters(["plantDetails"]),
-    headerDisplay() {
-      return getHeaderDisplay(this.$vuetify.breakpoint.name);
-    },
   },
   mounted() {
     this.$store.dispatch("getPlantDetailsByDate", {
@@ -135,8 +133,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.header {
-  cursor: pointer;
-}
-</style>
+<style lang="scss" scoped></style>
