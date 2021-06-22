@@ -80,19 +80,7 @@
                         :disabled="!isEditMode(item)"
                         ><v-icon>mdi-calendar-month</v-icon></v-btn
                       >
-                      <input
-                        :value="inputValue"
-                        class="
-                          bg-white
-                          text-gray-700
-                          w-full
-                          appearance-none
-                          border
-                          rounded-r
-                          focus:outline-none focus:border-blue-500
-                        "
-                        readonly
-                      />
+                      {{ inputValue }}
                     </div>
                   </template>
                 </vc-date-picker>
