@@ -6,7 +6,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="7">
+      <v-col cols="12" md="7">
         <vc-date-picker
           v-if="!$vuetify.theme.dark"
           v-model="selectedDate"
@@ -21,7 +21,7 @@
           is-dark
         />
       </v-col>
-      <v-col cols="5">
+      <v-col cols="12" md="5">
         <template v-if="formReady">
           <v-form ref="form">
             <v-container>
