@@ -190,7 +190,8 @@ export default {
 <style lang="scss" scoped>
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  justify-content: center;
 }
 .center {
   justify-content: center;
