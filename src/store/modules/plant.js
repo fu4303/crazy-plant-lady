@@ -4,6 +4,7 @@ export default {
   state: {
     plantLogEntries: [],
     plantDetails: [],
+    allPlantDetails: [],
   },
 
   mutations: {
@@ -24,6 +25,9 @@ export default {
     },
     addDetailsForDay(state, data) {
       state.plantDetails = data;
+    },
+    addAllPlantDetails(state, data) {
+      state.allPlantDetails = data;
     },
   },
   actions: {
@@ -115,6 +119,34 @@ export default {
       }
     },
 
+    async getAllPlantDetails({ commit }, payload) {
+      if (payload === null) {
+        commit("addAllPlantDetails", null);
+      } else {
+        const allPlantDetails = await firebase
+          .firestore()
+          .collection("users")
+          .doc(firebase.auth().currentUser.uid)
+          .collection("plants")
+          .doc(payload.id)
+          .collection("plant-details");
+
+        allPlantDetails.get().then((querySnapShot) => {
+          if (querySnapShot.empty) {
+            commit("addAllPlantDetails", null);
+          } else {
+            const allPlantDetails = [];
+            querySnapShot.forEach((doc) => {
+              const details = doc.data();
+              details.id = doc.id;
+              allPlantDetails.push(details);
+            });
+            commit("addAllPlantDetails", allPlantDetails);
+          }
+        });
+      }
+    },
+
     async addPlantDetailsEntry({ commit }, payload) {
       await firebase
         .firestore()
@@ -133,5 +165,6 @@ export default {
   getters: {
     plantLogEntries: (state) => state.plantLogEntries,
     plantDetails: (state) => state.plantDetails,
+    allPlantDetails: (state) => state.allPlantDetails,
   },
 };

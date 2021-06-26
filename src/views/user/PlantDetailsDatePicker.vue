@@ -8,17 +8,11 @@
     <v-row>
       <v-col cols="12" md="7">
         <vc-date-picker
-          v-if="!$vuetify.theme.dark"
           v-model="selectedDate"
           is-expanded
           @dayclick="onDayClick"
-        />
-        <vc-date-picker
-          v-if="$vuetify.theme.dark"
-          v-model="selectedDate"
-          is-expanded
-          @dayclick="onDayClick"
-          is-dark
+          :is-dark="$vuetify.theme.dark"
+          :attributes="attrs"
         />
       </v-col>
       <v-col cols="12" md="5">
@@ -70,7 +64,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { getDateTextFormat } from "@/utils/DateUtil.js";
+import { getDateTextFormat, dateStringToDate } from "@/utils/DateUtil.js";
 import PageHeader from "@/components/PageHeader.vue";
 export default {
   name: "PlantDetailsDatePicker",
@@ -84,12 +78,16 @@ export default {
       detailsForm: null,
       formReady: false,
       submitButtonText: "Update",
+      attrs: [],
     };
   },
   computed: {
-    ...mapGetters(["plantDetails"]),
+    ...mapGetters(["plantDetails", "allPlantDetails"]),
   },
   mounted() {
+    this.$store.dispatch("getAllPlantDetails", {
+      id: this.plantData.id,
+    });
     this.$store.dispatch("getPlantDetailsByDate", {
       id: this.plantData.id,
       dateText: getDateTextFormat(this.selectedDate),
@@ -108,6 +106,22 @@ export default {
           miscNotes: "",
         };
         this.formReady = true;
+      }
+    },
+    allPlantDetails: function () {
+      if (this.allPlantDetails.length) {
+        const dates = this.allPlantDetails.map((detail) =>
+          dateStringToDate(detail.dateText)
+        );
+        this.attrs = [
+          {
+            highlight: {
+              color: "purple",
+              fillMode: "light",
+            },
+            dates: dates,
+          },
+        ];
       }
     },
   },
