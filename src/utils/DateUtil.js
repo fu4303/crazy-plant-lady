@@ -46,4 +46,20 @@ const formatFirebaseDate = (date) => {
   return getCurrentDate(dateToUnixStamp);
 };
 
-export { getCurrentDate, getDateTextFormat, formatFirebaseDate };
+/**
+ * formats "YYYYMMDD" date string to Date
+ */
+const dateStringToDate = (dateString) => {
+  return new Date(
+    dateString.substring(0, 4),
+    dateString.substring(4, 6) - 1,
+    dateString.substring(6, 8)
+  );
+};
+
+export {
+  getCurrentDate,
+  getDateTextFormat,
+  formatFirebaseDate,
+  dateStringToDate,
+};
