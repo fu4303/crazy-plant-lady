@@ -27,7 +27,7 @@ export default {
       state.plantDetails = data;
     },
     addAllPlantDetails(state, data) {
-      state.allPlantDetails = data;
+      state.allPlantDetails.push(data);
     },
   },
   actions: {
@@ -135,13 +135,11 @@ export default {
           if (querySnapShot.empty) {
             commit("addAllPlantDetails", null);
           } else {
-            const allPlantDetails = [];
             querySnapShot.forEach((doc) => {
               const details = doc.data();
               details.id = doc.id;
-              allPlantDetails.push(details);
+              commit("addAllPlantDetails", details);
             });
-            commit("addAllPlantDetails", allPlantDetails);
           }
         });
       }
@@ -160,6 +158,7 @@ export default {
           createdAt: new Date(),
         });
       commit("addDetailsForDay", payload);
+      commit("addAllPlantDetails", payload);
     },
   },
   getters: {
