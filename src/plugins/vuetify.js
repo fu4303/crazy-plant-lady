@@ -17,6 +17,8 @@ export default new Vuetify({
         error: colors.red.accent3,
         background: colors.green.accent2,
         fontOne: colors.blue.darken4,
+        iconOne: colors.teal.darken1,
+        iconTwo: colors.blueGrey.darken1,
       },
       dark: {
         primaryOne: colors.teal.darken4,
@@ -27,6 +29,8 @@ export default new Vuetify({
         error: colors.red.darken1,
         background: colors.grey.darken4,
         fontOne: colors.lightBlue.lighten2,
+        iconOne: colors.teal.lighten1,
+        iconTwo: colors.purple.lighten2,
       },
     },
   },
