@@ -11,10 +11,10 @@
         <template v-if="!isEditMode(item)">
           <v-img height="250" src="@/assets/plant-cartoon-img.png"></v-img>
           <v-card-actions class="center card-actions">
-            <v-btn icon @click="editItem(item)">
+            <v-btn color="iconOne" icon @click="editItem(item)">
               <v-icon>mdi-pencil</v-icon>
             </v-btn>
-            <v-btn icon @click="goToDetails(item)">
+            <v-btn color="iconTwo" icon @click="goToDetails(item)">
               <v-icon>mdi-notebook</v-icon>
             </v-btn>
           </v-card-actions>
@@ -39,10 +39,10 @@
         <template v-if="isEditMode(item)">
           <v-img height="250" src="@/assets/plant-cartoon-img.png"></v-img>
           <v-card-actions class="center card-actions">
-            <v-btn icon @click="saveItem(item)">
+            <v-btn color="iconOne" icon @click="saveItem(item)">
               <v-icon>mdi-content-save</v-icon>
             </v-btn>
-            <v-btn icon @click="deleteItem(item)">
+            <v-btn color="error" icon @click="deleteItem(item)">
               <v-icon>mdi-delete</v-icon>
             </v-btn>
           </v-card-actions>
@@ -76,6 +76,7 @@
                     <div class="flex items-center">
                       <v-btn
                         icon
+                        color="accent"
                         @click="togglePopover()"
                         :disabled="!isEditMode(item)"
                         ><v-icon>mdi-calendar-month</v-icon></v-btn
