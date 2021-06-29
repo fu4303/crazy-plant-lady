@@ -5,6 +5,7 @@ export default {
     plantLogEntries: [],
     plantDetails: [],
     allPlantDetails: [],
+    dashboardNotes: "my notes",
   },
 
   mutations: {
@@ -29,7 +30,11 @@ export default {
     addAllPlantDetails(state, data) {
       state.allPlantDetails.push(data);
     },
+    updateDashboardNotes(state, data) {
+      state.dashboardNotes = data;
+    },
   },
+
   actions: {
     async addPlantToLog({ commit }, payload) {
       await firebase
@@ -160,10 +165,44 @@ export default {
       commit("addDetailsForDay", payload);
       commit("addAllPlantDetails", payload);
     },
+
+    async updateDashboardNotes({ commit }, payload) {
+      await firebase
+        .firestore()
+        .collection("users")
+        .doc(firebase.auth().currentUser.uid)
+        .collection("dashboardNotes")
+        .doc(payload.id)
+        .update({
+          notes: payload.notes,
+        });
+      commit("updateDashboardNotes", payload);
+    },
+
+    async getDashboardNotes({ commit }) {
+      const firebasePlantsRef = await firebase
+        .firestore()
+        .collection("users")
+        .doc(firebase.auth().currentUser.uid)
+        .collection("dashboardNotes");
+      firebasePlantsRef
+        .get()
+        .then((querySnapShot) => {
+          querySnapShot.forEach((doc) => {
+            const details = doc.data();
+            details.id = doc.id;
+            commit("updateDashboardNotes", details);
+          });
+        })
+        .catch((error) => {
+          console.warn("Error getting document:", error);
+        });
+    },
   },
   getters: {
     plantLogEntries: (state) => state.plantLogEntries,
     plantDetails: (state) => state.plantDetails,
     allPlantDetails: (state) => state.allPlantDetails,
+    dashboardNotes: (state) => state.dashboardNotes,
   },
 };
