@@ -6,39 +6,65 @@
       </v-col>
     </v-row>
     <v-row>
+      <v-col> Watch List </v-col>
       <v-col>
-        <p>
-          <span class="text-subtitle-2">Last Sign In:</span>
-          {{ this.lastSignIn }}
-        </p>
+        <v-row>
+          <v-col>
+            <v-textarea
+              name="my-notes"
+              label="My Notes"
+              v-model="notesText"
+              :loading="!notesLoaded"
+              :disabled="!notesLoaded"
+            ></v-textarea>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <v-btn @click="submitNotes">Submit</v-btn>
+            <v-btn @click="clearNotes">clear</v-btn>
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import { getCurrentDate } from "@/utils/DateUtil";
+import { mapGetters, mapActions } from "vuex";
 import PageHeader from "@/components/PageHeader.vue";
 export default {
   name: "UserDashboard",
   components: { PageHeader },
   data() {
     return {
-      lastSignIn: null,
+      notesText: "",
+      notesLoaded: false,
+      notesId: null,
     };
   },
   computed: {
-    ...mapGetters(["getUser"]),
+    ...mapGetters(["dashboardNotes"]),
+  },
+  watch: {
+    dashboardNotes: function () {
+      this.notesText = this.dashboardNotes.notes;
+      this.notesId = this.dashboardNotes.id;
+      this.notesLoaded = true;
+    },
   },
   methods: {
-    parseLastSignInTime() {
-      const unixTime = Date.parse(this.getUser.metadata.lastSignInTime);
-      this.lastSignIn = getCurrentDate(unixTime);
+    ...mapActions(["updateDashboardNotes"]),
+    submitNotes() {
+      this.updateDashboardNotes({ notes: this.notesText, id: this.notesId });
+    },
+    clearNotes() {
+      this.notesText = "";
     },
   },
   mounted: function () {
-    this.parseLastSignInTime();
+    console.log("mounted");
+    this.$store.dispatch("getDashboardNotes");
   },
 };
 </script>
