@@ -180,12 +180,12 @@ export default {
     },
 
     async getDashboardNotes({ commit }) {
-      const firebasePlantsRef = await firebase
+      const dashboardRef = await firebase
         .firestore()
         .collection("users")
         .doc(firebase.auth().currentUser.uid)
         .collection("dashboardNotes");
-      firebasePlantsRef
+      dashboardRef
         .get()
         .then((querySnapShot) => {
           querySnapShot.forEach((doc) => {
@@ -196,6 +196,29 @@ export default {
         })
         .catch((error) => {
           console.warn("Error getting document:", error);
+        });
+    },
+
+    async getWatchlistPlants({ commit }) {
+      console.log("in getWatchlistPlants");
+      const watchlistRef = await firebase
+        .firestore()
+        .collection("users")
+        .doc(firebase.auth().currentUser.uid)
+        .collection("plants");
+
+      const query = watchlistRef.where("watch", "==", true);
+      query
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+            commit("test", doc);
+          });
+        })
+        .catch((error) => {
+          console.warn("Error getting documents: ", error);
         });
     },
   },

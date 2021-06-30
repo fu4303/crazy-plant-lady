@@ -17,6 +17,9 @@
             <v-btn color="iconTwo" icon @click="goToDetails(item)">
               <v-icon>mdi-notebook</v-icon>
             </v-btn>
+            <v-btn color="primary" icon @click="goToDetails(item)">
+              <v-icon>mdi-star</v-icon>
+            </v-btn>
           </v-card-actions>
           <v-card-title class="center card-title py-4">
             {{ item.plantName }}

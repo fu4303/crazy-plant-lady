@@ -65,6 +65,7 @@ export default {
   mounted: function () {
     console.log("mounted");
     this.$store.dispatch("getDashboardNotes");
+    this.$store.dispatch("getWatchlistPlants");
   },
 };
 </script>
