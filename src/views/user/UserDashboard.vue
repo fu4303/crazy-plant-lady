@@ -6,7 +6,18 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col> Watch List </v-col>
+      <v-col>
+        <v-list shaped>
+          <v-subheader>My Watch List</v-subheader>
+          <v-list-item-group v-model="selectedItem" color="primary">
+            <v-list-item v-for="(item, i) in watchlist" :key="i">
+              <v-list-item-content>
+                <v-list-item-title v-text="item.plantName"></v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
+      </v-col>
       <v-col>
         <v-row>
           <v-col>
@@ -41,10 +52,11 @@ export default {
       notesText: "",
       notesLoaded: false,
       notesId: null,
+      selectedItem: 1,
     };
   },
   computed: {
-    ...mapGetters(["dashboardNotes"]),
+    ...mapGetters(["dashboardNotes", "watchlist"]),
   },
   watch: {
     dashboardNotes: function () {
@@ -63,9 +75,9 @@ export default {
     },
   },
   mounted: function () {
-    console.log("mounted");
     this.$store.dispatch("getDashboardNotes");
-    this.$store.dispatch("getWatchlistPlants");
+    if (this.watchlist && this.watchlist.length > 0) return;
+    this.$store.dispatch("getWatchlistPlants"); // already fetched.
   },
 };
 </script>
