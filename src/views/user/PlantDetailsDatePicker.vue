@@ -110,7 +110,10 @@ export default {
     },
     allPlantDetails: function () {
       if (this.allPlantDetails.length) {
-        const dates = this.allPlantDetails.map((detail) =>
+        const filteredDetails = this.allPlantDetails.filter(
+          (details) => details !== null
+        );
+        const dates = filteredDetails.map((detail) =>
           dateStringToDate(detail.dateText)
         );
         this.attrs = [

@@ -52,7 +52,8 @@ export default {
         .collection("users")
         .doc(firebase.auth().currentUser.uid)
         .collection("plants")
-        .add({
+        .doc(payload.id)
+        .set({
           ...payload,
           createdAt: new Date(),
         });

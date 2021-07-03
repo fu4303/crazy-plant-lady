@@ -74,8 +74,6 @@ export default {
       this.notesText = "";
     },
     routeToPlant(plant) {
-      console.log(plant);
-      // this.$router.push(`/home/plantlog/plantdetails/${plant.id}`);
       this.$router.push({
         name: "plantdetailscalendar",
         params: { plantData: plant },
