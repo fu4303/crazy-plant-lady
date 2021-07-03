@@ -29,7 +29,8 @@
       </v-row>
       <v-row>
         <v-col>
-          <PlantLogCards></PlantLogCards>
+          <!-- <PlantLogCards></PlantLogCards> -->
+          <PlantLogList></PlantLogList>
         </v-col>
       </v-row>
     </v-container>
@@ -38,10 +39,16 @@
 
 <script>
 import { mapGetters } from "vuex";
-import PlantLogCards from "@/components/PlantLogCards.vue";
 import PageHeader from "@/components/PageHeader.vue";
+import PlantLogList from "@/components/PlantLogList.vue";
+import { v4 as uuidv4 } from "uuid";
+import {
+  uniqueNamesGenerator,
+  adjectives,
+  animals,
+} from "unique-names-generator";
 export default {
-  components: { PlantLogCards, PageHeader },
+  components: { PageHeader, PlantLogList },
   name: "PlantLog",
   data() {
     return {
@@ -56,8 +63,13 @@ export default {
   methods: {
     addPlantToLog() {
       const newPlant = {
-        plantName: "-",
-        plantType: "-",
+        plantName: uniqueNamesGenerator({
+          dictionaries: [adjectives, animals],
+          length: 2,
+        }),
+        plantType: "plant type",
+        watch: false,
+        id: uuidv4(),
         dateAcquired: new Date(),
       };
       this.$store.dispatch("addPlantToLog", newPlant);
