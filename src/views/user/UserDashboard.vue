@@ -11,7 +11,7 @@
           <v-subheader>My Watch List</v-subheader>
           <v-list-item-group>
             <v-list-item v-for="(item, i) in watchlist" :key="i">
-              <v-list-item-content>
+              <v-list-item-content @click="routeToPlant(item)">
                 <v-list-item-title v-text="item.plantName"></v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -72,6 +72,14 @@ export default {
     },
     clearNotes() {
       this.notesText = "";
+    },
+    routeToPlant(plant) {
+      console.log(plant);
+      // this.$router.push(`/home/plantlog/plantdetails/${plant.id}`);
+      this.$router.push({
+        name: "plantdetailscalendar",
+        params: { plantData: plant },
+      });
     },
   },
   mounted: function () {
