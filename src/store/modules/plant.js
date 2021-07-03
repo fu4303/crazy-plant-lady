@@ -37,6 +37,12 @@ export default {
     addPlantToWatchlist(state, data) {
       state.watchlist.push(data);
     },
+    removePlantFromWatchlist(state, data) {
+      const filteredPlants = state.watchlist.filter(
+        (plant) => plant.id !== data.id
+      );
+      state.watchlist = filteredPlants;
+    },
   },
 
   actions: {
@@ -204,7 +210,6 @@ export default {
     },
 
     async getWatchlistPlants({ commit }) {
-      console.log("in getWatchlistPlants");
       const watchlistRef = await firebase
         .firestore()
         .collection("users")
@@ -224,6 +229,23 @@ export default {
         .catch((error) => {
           console.warn("Error getting documents: ", error);
         });
+    },
+
+    async togglePlantToWatchlist({ commit }, payload) {
+      await firebase
+        .firestore()
+        .collection("users")
+        .doc(firebase.auth().currentUser.uid)
+        .collection("plants")
+        .doc(payload.id)
+        .update({
+          watch: payload.watch,
+        });
+      if (payload.watch) {
+        commit("addPlantToWatchlist", payload);
+      } else {
+        commit("removePlantFromWatchlist", payload);
+      }
     },
   },
   getters: {

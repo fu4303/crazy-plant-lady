@@ -7,9 +7,9 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-list shaped>
+        <v-list dense>
           <v-subheader>My Watch List</v-subheader>
-          <v-list-item-group v-model="selectedItem" color="primary">
+          <v-list-item-group>
             <v-list-item v-for="(item, i) in watchlist" :key="i">
               <v-list-item-content>
                 <v-list-item-title v-text="item.plantName"></v-list-item-title>

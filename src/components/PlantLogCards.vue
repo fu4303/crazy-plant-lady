@@ -17,8 +17,21 @@
             <v-btn color="iconTwo" icon @click="goToDetails(item)">
               <v-icon>mdi-notebook</v-icon>
             </v-btn>
-            <v-btn color="primary" icon @click="goToDetails(item)">
+            <v-btn
+              v-if="item.watch"
+              color="primary"
+              icon
+              @click="removeFromWatchlist(item)"
+            >
               <v-icon>mdi-star</v-icon>
+            </v-btn>
+            <v-btn
+              v-if="!item.watch"
+              color="primary"
+              icon
+              @click="addToWatchlist(item)"
+            >
+              <v-icon>mdi-star-outline</v-icon>
             </v-btn>
           </v-card-actions>
           <v-card-title class="center card-title py-4">
@@ -99,7 +112,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import { formatFirebaseDate } from "@/utils/DateUtil.js";
 export default {
   name: "PlantLogCards",
@@ -149,6 +162,7 @@ export default {
     this.$store.dispatch("getAllPlants"); // already fetched.
   },
   methods: {
+    ...mapActions(["togglePlantToWatchlist"]),
     editItem(item) {
       this.editMode.editModeId = item.id;
       this.editMode.isEditMode = true;
@@ -180,6 +194,14 @@ export default {
         name: "plantdetailscalendar",
         params: { id: item.id, plantData: item },
       });
+    },
+    addToWatchlist(item) {
+      item.watch = true;
+      this.togglePlantToWatchlist(item);
+    },
+    removeFromWatchlist(item) {
+      item.watch = false;
+      this.togglePlantToWatchlist(item);
     },
   },
   filters: {
