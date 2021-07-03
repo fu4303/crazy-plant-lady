@@ -6,6 +6,7 @@ export default {
     plantDetails: [],
     allPlantDetails: [],
     dashboardNotes: "my notes",
+    watchlist: [],
   },
 
   mutations: {
@@ -32,6 +33,9 @@ export default {
     },
     updateDashboardNotes(state, data) {
       state.dashboardNotes = data;
+    },
+    addPlantToWatchlist(state, data) {
+      state.watchlist.push(data);
     },
   },
 
@@ -212,9 +216,9 @@ export default {
         .get()
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
-            commit("test", doc);
+            const watchListPlant = doc.data();
+            watchListPlant.id = doc.id;
+            commit("addPlantToWatchlist", watchListPlant);
           });
         })
         .catch((error) => {
@@ -227,5 +231,6 @@ export default {
     plantDetails: (state) => state.plantDetails,
     allPlantDetails: (state) => state.allPlantDetails,
     dashboardNotes: (state) => state.dashboardNotes,
+    watchlist: (state) => state.watchlist,
   },
 };
