@@ -2,7 +2,7 @@
   <div v-if="plant">
     <v-card
       max-width="385"
-      class="ma-2"
+      class="ma-2 mt-md-16"
       :class="{ flipIn: isEditMode, flipOut: !isEditMode }"
     >
       <!-- start display card -->
