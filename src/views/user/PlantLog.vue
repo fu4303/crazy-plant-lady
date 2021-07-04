@@ -29,7 +29,6 @@
       </v-row>
       <v-row>
         <v-col>
-          <!-- <PlantLogCards></PlantLogCards> -->
           <PlantLogList></PlantLogList>
         </v-col>
       </v-row>

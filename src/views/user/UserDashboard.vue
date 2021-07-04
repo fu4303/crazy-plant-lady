@@ -7,8 +7,13 @@
     </v-row>
     <v-row>
       <v-col cols="12" md="6">
+        <SectionHeader>
+          <template v-slot:title>My Watchlist</template>
+          <template v-slot:tooltip
+            >Plants that you want to keep a close eye on</template
+          >
+        </SectionHeader>
         <v-list dense>
-          <v-subheader>My Watch List</v-subheader>
           <v-list-item-group>
             <v-list-item v-for="(item, i) in watchlist" :key="i">
               <v-list-item-content @click="routeToPlant(item)">
@@ -19,11 +24,16 @@
         </v-list>
       </v-col>
       <v-col cols="12" md="6">
+        <SectionHeader>
+          <template v-slot:title>My Notes</template>
+          <template v-slot:tooltip
+            >Write helpful notes to your future self</template
+          >
+        </SectionHeader>
         <v-row>
           <v-col>
             <v-textarea
               name="my-notes"
-              label="My Notes"
               v-model="notesText"
               :loading="!notesLoaded"
               :disabled="!notesLoaded"
@@ -44,9 +54,10 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import PageHeader from "@/components/PageHeader.vue";
+import SectionHeader from "@/components/SectionHeader.vue";
 export default {
   name: "UserDashboard",
-  components: { PageHeader },
+  components: { PageHeader, SectionHeader },
   data() {
     return {
       notesText: "",
