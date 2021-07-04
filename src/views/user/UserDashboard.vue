@@ -6,7 +6,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col>
+      <v-col cols="12" md="6">
         <v-list dense>
           <v-subheader>My Watch List</v-subheader>
           <v-list-item-group>
@@ -18,7 +18,7 @@
           </v-list-item-group>
         </v-list>
       </v-col>
-      <v-col>
+      <v-col cols="12" md="6">
         <v-row>
           <v-col>
             <v-textarea
