@@ -128,16 +128,12 @@ export default {
   mounted() {
     this.isEditMode = false;
   },
-  created() {
-    console.log(this.plant);
-  },
   methods: {
     ...mapActions(["togglePlantToWatchlist"]),
     editItem() {
       this.isEditMode = true;
     },
     saveItem() {
-      console.log(this.plant);
       this.isEditMode = false;
       this.$store.dispatch("updatePlantEntry", this.plant);
     },

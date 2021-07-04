@@ -76,7 +76,7 @@ export default {
     routeToPlant(plant) {
       this.$router.push({
         name: "plantdetailscalendar",
-        params: { plantData: plant },
+        params: { plantData: plant, id: plant.id },
       });
     },
   },
