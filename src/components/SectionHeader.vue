@@ -46,4 +46,7 @@ export default {
     cursor: pointer;
   }
 }
+.section-header-container:hover {
+  cursor: default;
+}
 </style>
