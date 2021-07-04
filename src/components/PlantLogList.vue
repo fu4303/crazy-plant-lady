@@ -37,7 +37,6 @@ export default {
   },
   mounted() {
     if (this.plantLogEntries && this.plantLogEntries.length > 0) {
-      console.log(this.plantLogEntries);
       return;
     }
     this.$store.dispatch("getAllPlants"); // already fetched.

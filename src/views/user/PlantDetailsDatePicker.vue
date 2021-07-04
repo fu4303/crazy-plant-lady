@@ -16,8 +16,8 @@
         />
       </v-col>
       <v-col cols="12" md="5">
-        <template v-if="formReady">
-          <v-form ref="form">
+        <template>
+          <v-form ref="form" v-if="detailsForm">
             <v-container>
               <v-row>
                 <v-col cols="4" md="4">
@@ -75,7 +75,12 @@ export default {
   data() {
     return {
       selectedDate: new Date(),
-      detailsForm: null,
+      detailsForm: {
+        didFeed: false,
+        didPrune: false,
+        didWater: false,
+        miscNotes: "",
+      },
       formReady: false,
       submitButtonText: "Update",
       attrs: [],
@@ -92,21 +97,15 @@ export default {
       id: this.plantData.id,
       dateText: getDateTextFormat(this.selectedDate),
     });
+    this.detailsForm;
+    this.formReady = true;
   },
   watch: {
     plantDetails: function () {
       if (this.plantDetails) {
         this.detailsForm = this.plantDetails;
-        this.formReady = true;
-      } else {
-        this.detailsForm = {
-          didFeed: false,
-          didPrune: false,
-          didWater: false,
-          miscNotes: "",
-        };
-        this.formReady = true;
       }
+      this.formReady = true;
     },
     allPlantDetails: function () {
       if (this.allPlantDetails.length) {
