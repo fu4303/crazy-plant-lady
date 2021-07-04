@@ -75,10 +75,14 @@
               Dashboard
             </h2>
             <p class="body-1 mt-2">
-              We give you the tools and insights that you need. Get a snapshot
-              of your most recent events, add notes for yourself, view your last
-              login date and time, and more.
+              We give you the tools and insights that you need.
             </p>
+            <ul>
+              <li>
+                Create and update a watchlist of plants to keep a close eye on.
+              </li>
+              <li>Add helpful notes for yourself.</li>
+            </ul>
           </div>
         </v-col>
         <v-col order="1" order-sm="2">
@@ -186,5 +190,11 @@ export default {
 .quote-text {
   font-family: "Karla", sans-serif;
   font-size: 1.5rem;
+}
+ul {
+  li {
+    list-style: none;
+    margin-bottom: 10px;
+  }
 }
 </style>
