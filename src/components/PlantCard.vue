@@ -4,6 +4,8 @@
       max-width="385"
       class="ma-2 mt-md-16"
       :class="{ flipIn: isEditMode, flipOut: !isEditMode }"
+      color="primaryTwo"
+      elevation="7"
     >
       <!-- start display card -->
       <template v-if="!isEditMode">

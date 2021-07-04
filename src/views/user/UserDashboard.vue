@@ -13,7 +13,7 @@
             >Plants that you want to keep a close eye on</template
           >
         </SectionHeader>
-        <v-list dense>
+        <v-list dense color="primaryTwo" elevation="7" rounded>
           <v-list-item-group>
             <v-list-item v-for="(item, i) in watchlist" :key="i">
               <v-list-item-content @click="routeToPlant(item)">
@@ -32,18 +32,34 @@
         </SectionHeader>
         <v-row>
           <v-col>
-            <v-textarea
-              name="my-notes"
-              v-model="notesText"
-              :loading="!notesLoaded"
-              :disabled="!notesLoaded"
-            ></v-textarea>
+            <v-card color="primaryTwo" elevation="7">
+              <v-card-text>
+                <v-textarea
+                  name="my-notes"
+                  v-model="notesText"
+                  :loading="!notesLoaded"
+                  :disabled="!notesLoaded"
+                  color="primaryTwo"
+                  elevation="7"
+                ></v-textarea>
+              </v-card-text>
+            </v-card>
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-btn @click="submitNotes">Submit</v-btn>
-            <v-btn @click="clearNotes">clear</v-btn>
+            <v-row>
+              <v-col
+                ><v-btn block color="secondaryOne" @click="submitNotes"
+                  >Submit</v-btn
+                ></v-col
+              >
+              <v-col
+                ><v-btn block color="secondaryTwo" @click="clearNotes"
+                  >clear</v-btn
+                ></v-col
+              >
+            </v-row>
           </v-col>
         </v-row>
       </v-col>
