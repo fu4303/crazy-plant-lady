@@ -35,7 +35,9 @@ export default {
   }
   .header {
     align-self: center;
-    cursor: pointer;
   }
+}
+.header-container:hover {
+  cursor: default;
 }
 </style>

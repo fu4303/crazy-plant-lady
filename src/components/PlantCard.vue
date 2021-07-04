@@ -11,28 +11,65 @@
       <template v-if="!isEditMode">
         <v-img height="250" src="@/assets/plant-cartoon-img.png"></v-img>
         <v-card-actions class="center card-actions">
-          <v-btn color="iconOne" icon @click="editItem()">
-            <v-icon>mdi-pencil</v-icon>
-          </v-btn>
-          <v-btn color="iconTwo" icon @click="goToDetails()">
-            <v-icon>mdi-notebook</v-icon>
-          </v-btn>
-          <v-btn
-            v-if="plant.watch"
-            color="primary"
-            icon
-            @click="removeFromWatchlist()"
-          >
-            <v-icon>mdi-star</v-icon>
-          </v-btn>
-          <v-btn
-            v-if="!plant.watch"
-            color="primary"
-            icon
-            @click="addToWatchlist()"
-          >
-            <v-icon>mdi-star-outline</v-icon>
-          </v-btn>
+          <v-tooltip top>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                color="iconOne"
+                icon
+                @click="editItem()"
+                v-bind="attrs"
+                v-on="on"
+              >
+                <v-icon>mdi-pencil</v-icon>
+              </v-btn>
+            </template>
+            <span>Edit {{ plant.plantName }}</span>
+          </v-tooltip>
+
+          <v-tooltip top>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                color="iconTwo"
+                icon
+                @click="goToDetails()"
+                v-bind="attrs"
+                v-on="on"
+              >
+                <v-icon>mdi-notebook</v-icon>
+              </v-btn>
+            </template>
+            <span>Go to Details</span>
+          </v-tooltip>
+
+          <v-tooltip top v-if="plant.watch">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                color="primary"
+                icon
+                @click="removeFromWatchlist()"
+                v-bind="attrs"
+                v-on="on"
+              >
+                <v-icon>mdi-star</v-icon>
+              </v-btn>
+            </template>
+            <span>Remove {{ plant.plantName }} from Watchlist</span>
+          </v-tooltip>
+
+          <v-tooltip top v-if="!plant.watch">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                color="primary"
+                icon
+                @click="addToWatchlist()"
+                v-bind="attrs"
+                v-on="on"
+              >
+                <v-icon>mdi-star-outline</v-icon>
+              </v-btn>
+            </template>
+            <span>Add {{ plant.plantName }} to Watchlist</span>
+          </v-tooltip>
         </v-card-actions>
         <v-card-title class="center card-title py-4">
           {{ plant.plantName }}
@@ -55,12 +92,37 @@
       <template v-if="isEditMode">
         <v-img height="250" src="@/assets/plant-cartoon-img.png"></v-img>
         <v-card-actions class="center card-actions">
-          <v-btn color="iconOne" icon @click="saveItem()">
-            <v-icon>mdi-content-save</v-icon>
-          </v-btn>
-          <v-btn color="error" icon @click="deleteItem()">
-            <v-icon>mdi-delete</v-icon>
-          </v-btn>
+          <v-tooltip top>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                v-if="!plant.watch"
+                color="iconOne"
+                icon
+                @click="saveItem()"
+                v-bind="attrs"
+                v-on="on"
+              >
+                <v-icon>mdi-content-save</v-icon>
+              </v-btn>
+            </template>
+            <span>Save Changes</span>
+          </v-tooltip>
+
+          <v-tooltip top>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                v-if="!plant.watch"
+                color="error"
+                icon
+                @click="deleteItem()"
+                v-bind="attrs"
+                v-on="on"
+              >
+                <v-icon>mdi-delete</v-icon>
+              </v-btn>
+            </template>
+            <span>Delete {{ plant.plantName }}</span>
+          </v-tooltip>
         </v-card-actions>
         <v-card-title>
           <v-text-field
