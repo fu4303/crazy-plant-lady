@@ -15,7 +15,7 @@ export default new Vuetify({
         secondaryTwo: colors.purple.lighten4,
         accent: colors.blueGrey.darken1,
         error: colors.red.accent3,
-        background: colors.lightGreen.lighten3,
+        background: colors.teal.accent2,
         componentOne: colors.green.accent1,
         fontOne: colors.blue.darken4,
         fontTwo: colors.lightBlue.darken4,
