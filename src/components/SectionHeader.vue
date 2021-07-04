@@ -13,6 +13,7 @@
       </template>
       <span><slot name="tooltip"></slot></span>
     </v-tooltip>
+    <slot name="action"></slot>
   </div>
 </template>
 
@@ -39,8 +40,8 @@ export default {
 .section-header-container {
   width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  justify-content: center;
   .section-header {
     cursor: pointer;
   }
