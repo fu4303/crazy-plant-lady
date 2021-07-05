@@ -1,4 +1,5 @@
 module.exports = {
+  publicPath: "/crazyplantperson/",
   transpileDependencies: ["vuetify"],
   css: {
     loaderOptions: {
