@@ -7,55 +7,63 @@
     </v-row>
     <v-row>
       <v-col cols="12" md="7">
-        <vc-date-picker
-          v-model="selectedDate"
-          is-expanded
-          @dayclick="onDayClick"
-          :is-dark="$vuetify.theme.dark"
-          :attributes="attrs"
-        />
+        <v-card color="primaryTwo" elevation="7">
+          <v-card-text>
+            <vc-date-picker
+              v-model="selectedDate"
+              is-expanded
+              @dayclick="onDayClick"
+              :is-dark="$vuetify.theme.dark"
+              :attributes="attrs"
+            />
+          </v-card-text>
+        </v-card>
       </v-col>
       <v-col cols="12" md="5">
         <template>
-          <v-form ref="form" v-if="detailsForm">
-            <v-container>
-              <v-row>
-                <v-col cols="4" md="4">
-                  <v-checkbox
-                    v-model="detailsForm.didPrune"
-                    :label="`Did You Prune Today?`"
-                  ></v-checkbox>
-                </v-col>
-                <v-col cols="4" md="4">
-                  <v-checkbox
-                    v-model="detailsForm.didFeed"
-                    :label="`Did You Feed Today?`"
-                  ></v-checkbox>
-                </v-col>
-                <v-col cols="4" md="4">
-                  <v-checkbox
-                    v-model="detailsForm.didWater"
-                    :label="`Did You Water Today?`"
-                  ></v-checkbox>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col>
-                  <v-textarea
-                    name="miscnotes"
-                    v-model="detailsForm.miscNotes"
-                    filled
-                    no-resize
-                    rows="3"
-                    label="Misc. Notes"
-                  ></v-textarea>
-                </v-col>
-              </v-row>
-            </v-container>
-            <v-btn class="mt-2" @click="submitPlantDetails()" color="accent">{{
-              submitButtonText
-            }}</v-btn>
-          </v-form>
+          <v-card color="primaryTwo" elevation="7">
+            <v-card-text>
+              <v-form ref="form" v-if="detailsForm">
+                <v-container>
+                  <v-row>
+                    <v-col cols="4" md="4">
+                      <v-checkbox
+                        v-model="detailsForm.didPrune"
+                        :label="`Did You Prune Today?`"
+                      ></v-checkbox>
+                    </v-col>
+                    <v-col cols="4" md="4">
+                      <v-checkbox
+                        v-model="detailsForm.didFeed"
+                        :label="`Did You Feed Today?`"
+                      ></v-checkbox>
+                    </v-col>
+                    <v-col cols="4" md="4">
+                      <v-checkbox
+                        v-model="detailsForm.didWater"
+                        :label="`Did You Water Today?`"
+                      ></v-checkbox>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col>
+                      <v-textarea
+                        name="miscnotes"
+                        v-model="detailsForm.miscNotes"
+                        filled
+                        no-resize
+                        rows="3"
+                        label="Misc. Notes"
+                      ></v-textarea>
+                    </v-col>
+                  </v-row>
+                </v-container>
+                <v-btn class="mt-2" @click="submitPlantDetails()" color="accent">{{
+                  submitButtonText
+                }}</v-btn>
+              </v-form>
+            </v-card-text>
+          </v-card>
         </template>
       </v-col>
     </v-row>
