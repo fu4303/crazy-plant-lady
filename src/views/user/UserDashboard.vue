@@ -13,7 +13,24 @@
             >Plants that you want to keep a close eye on</template
           >
         </SectionHeader>
-        <v-list dense color="primaryTwo" elevation="7" rounded>
+        <div v-if="!watchlistLoaded" class="d-flex justify-center">
+          <v-progress-circular
+            indeterminate
+            color="iconTwo"
+          ></v-progress-circular>
+        </div>
+        <div v-if="watchlistLoaded && watchlistEmpty">
+          <p style="text-align: center">
+            You don't have any items in your watchlist
+          </p>
+        </div>
+        <v-list
+          v-if="watchlistLoaded && !watchlistEmpty"
+          dense
+          color="primaryTwo"
+          elevation="7"
+          rounded
+        >
           <v-list-item-group>
             <v-list-item v-for="(item, i) in watchlist" :key="i">
               <v-list-item-content @click="routeToPlant(item)">
@@ -80,6 +97,8 @@ export default {
       notesLoaded: false,
       notesId: null,
       selectedItem: 1,
+      watchlistEmpty: true,
+      watchlistLoaded: false,
     };
   },
   computed: {
@@ -90,6 +109,16 @@ export default {
       this.notesText = this.dashboardNotes.notes;
       this.notesId = this.dashboardNotes.id;
       this.notesLoaded = true;
+    },
+    watchlist: function () {
+      if (this.watchlist[0] === null) {
+        // no watchlist items
+        this.watchlistEmpty = true;
+        this.watchlistLoaded = true;
+      } else if (this.watchlist.length > 0) {
+        this.watchlistEmpty = false;
+        this.watchlistLoaded = true;
+      }
     },
   },
   methods: {
