@@ -1,5 +1,6 @@
 module.exports = {
-  publicPath: "/crazyplantperson/",
+  publicPath:
+    process.env.NODE_ENV === "production" ? "/crazyplantperson/" : "/",
   transpileDependencies: ["vuetify"],
   css: {
     loaderOptions: {
