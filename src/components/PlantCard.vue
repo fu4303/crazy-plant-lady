@@ -95,7 +95,6 @@
           <v-tooltip top>
             <template v-slot:activator="{ on, attrs }">
               <v-btn
-                v-if="!plant.watch"
                 color="iconOne"
                 icon
                 @click="saveItem()"
@@ -111,7 +110,6 @@
           <v-tooltip top>
             <template v-slot:activator="{ on, attrs }">
               <v-btn
-                v-if="!plant.watch"
                 color="error"
                 icon
                 @click="deleteItem()"
