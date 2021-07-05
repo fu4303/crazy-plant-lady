@@ -221,11 +221,15 @@ export default {
       query
         .get()
         .then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            const watchListPlant = doc.data();
-            watchListPlant.id = doc.id;
-            commit("addPlantToWatchlist", watchListPlant);
-          });
+          if (querySnapshot.empty) {
+            commit("addPlantToWatchlist", null);
+          } else {
+            querySnapshot.forEach((doc) => {
+              const watchListPlant = doc.data();
+              watchListPlant.id = doc.id;
+              commit("addPlantToWatchlist", watchListPlant);
+            });
+          }
         })
         .catch((error) => {
           console.warn("Error getting documents: ", error);
