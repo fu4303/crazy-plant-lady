@@ -130,6 +130,12 @@ export default {
   methods: {
     ...mapActions(["addPlantDetailsEntry"]),
     onDayClick: function () {
+      this.detailsForm = {
+        didFeed: false,
+        didPrune: false,
+        didWater: false,
+        miscNotes: "",
+      };
       this.$store.dispatch("getPlantDetailsByDate", {
         id: this.plantData.id,
         dateText:
